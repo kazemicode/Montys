@@ -1,0 +1,26 @@
+{
+  "name": "cst336_final_project",
+  "version": "1.0.0",
+  "description": "CST336_Final_Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nwarcord/CST336_Final_Project.git"
+  },
+  "author": "SCSI Logic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nwarcord/CST336_Final_Project/issues"
+  },
+  "homepage": "https://github.com/nwarcord/CST336_Final_Project#readme",
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "jsonfile": "^5.0.0",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0"
+  }
+}
