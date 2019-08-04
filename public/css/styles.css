@@ -1,3 +1,79 @@
 :root {
     --basic-font: 'Roboto Slab', serif;
+    --fancy-font: 'Lobster Two', Helvetica, sans-serif;
+    --bg-color: rgb(30, 30, 34);
+    --dark-blue: rgb(5, 33, 55);
+    --violet-hover: rgb(148, 0, 122);
+    --light-yellow: rgb(240, 194, 151);
+    background-color: var(--bg-color);
+    margin: auto;
+    max-width: 1366px;
+}
+
+.navbar {
+    display: flex;
+    background-color: var(--dark-blue);
+    justify-content: center;
+}
+
+.navbar a {
+    color: var(--light-yellow);
+    padding: 16px;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--fancy-font);
+}
+
+.navbar a:hover, .current-page {
+    background-color: var(--violet-hover);
+    transition: 0.7s;
+    /* color: var(); */
+}
+
+#cart {
+    margin-left: auto;
+}
+
+.head-graphic {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    max-height: 300px;
+}
+
+#head-image {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+}
+
+#head-text {
+    max-height: 300px;
+    width: auto;
+    z-index: 100;
+}
+
+#banner {
+    justify-content: left;
+    max-height: 75px;
+}
+
+#banner-text {
+    max-height: 75px;
+    width: auto;
+    z-index: 100;
+}
+
+.featured {
+    text-align: center;
+}
+
+#home-featured {
+    font-family: var(--fancy-font);
+    color: var(--light-yellow);
+    font-size: 64px;
+    font-style: italic;
 }
