@@ -1,40 +1,81 @@
 :root {
     --basic-font: 'Roboto Slab', serif;
     --fancy-font: 'Lobster Two', Helvetica, sans-serif;
-    --bg-color: rgb(30, 30, 34);
+    --bg-color-dark: rgb(30, 30, 34);
+    --bg-color-light: rgb(250, 255, 255);
     --dark-blue: rgb(5, 33, 55);
     --violet-hover: rgb(148, 0, 122);
     --light-yellow: rgb(240, 194, 151);
-    background-color: var(--bg-color);
+    --dark-violet: rgb(16, 7, 38);
+    --medium-violet: rgb(34, 0, 41);
     margin: auto;
+}
+
+a, body, div, footer, form, header, h1, h2, h3, html, img, nav, p, span, u {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+.page-content, .ui-elements {
+    display: block;
     max-width: 1366px;
+    margin: 0 auto;
+}
+
+.dark-content {
+    background-color: var(--dark-blue);
+}
+
+.light-content {
+    background-color: var(--bg-color-light);
 }
 
 .navbar {
     display: flex;
-    background-color: var(--dark-blue);
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    height: 64px;
+    /* background-color: var(--dark-blue); */
     justify-content: center;
+    -webkit-box-pack: center;
 }
 
 .navbar a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: var(--light-yellow);
-    padding: 16px;
+    padding: 0 16px;
+    font-size: 24px;
     text-align: center;
     text-decoration: none;
     font-family: var(--fancy-font);
 }
 
-.navbar a:hover, .current-page {
-    background-color: var(--violet-hover);
+.navbar a:hover {
+    color: var(--violet-hover);
     transition: 0.7s;
-    /* color: var(); */
 }
 
-#cart {
-    margin-left: auto;
+.current-page {
+    color: var(--violet-hover) !important;
+}
+
+#nav-logo {
+    padding: 4px 8px;
+    position: absolute;
+    z-index: 2;
+    height: 56px;
+    width: auto;
+    overflow: hidden;
 }
 
 .head-graphic {
+    opacity: .8;
+    border-radius: 4px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -51,7 +92,8 @@
 }
 
 #head-text {
-    max-height: 300px;
+    max-height: 284px;
+    padding: 16px 0;
     width: auto;
     z-index: 100;
 }
