@@ -19,10 +19,18 @@ a, body, div, footer, form, header, h1, h2, h3, html, img, nav, p, span, u {
     vertical-align: baseline;
 }
 
+.span-center {
+    text-align: center;
+}
+
 .page-content, .ui-elements {
     display: block;
     max-width: 1366px;
     margin: 0 auto;
+}
+
+.page-content {
+    text-align: center;
 }
 
 .dark-content {
@@ -30,7 +38,12 @@ a, body, div, footer, form, header, h1, h2, h3, html, img, nav, p, span, u {
 }
 
 .light-content {
-    background-color: var(--bg-color-light);
+    background-color: white;
+}
+
+.divider-bar {
+    background-color: var(--bg-color-dark);
+    padding: 1px;
 }
 
 .navbar {
@@ -118,4 +131,77 @@ a, body, div, footer, form, header, h1, h2, h3, html, img, nav, p, span, u {
     color: var(--light-yellow);
     font-size: 64px;
     font-style: italic;
+}
+
+.search-filters {
+    display: block;
+}
+
+.search-title {
+    font-family: var(--fancy-font);
+    font-size: 64px;
+    color: var(--violet-hover);
+    padding: 24px 0;
+}
+
+#search-form {
+    padding-top: 128px;
+    padding-left: 32px;
+    padding-right: 32px;
+    text-align: center;
+}
+
+#search-form label {
+    font-family: var(--fancy-font);
+    font-size: 32px;
+    padding: 0 8px;
+    color: var(--medium-violet);
+}
+
+#search-form input, #search-form select {
+    font-family: var(--fancy-font);
+    font-size: 24px;
+    padding-left: 8px;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid slategray;
+    background: none;
+    outline: none;
+}
+
+#search-form select {
+    box-sizing: border-box;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(to bottom, var(--light-yellow) 0%, white 75%);
+    background-repeat: no-repeat, repeat;
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+    border-radius: 3px;
+    border-bottom: none;
+}
+
+#search-form option {
+    font-family: var(--fancy-font);
+}
+
+#search-form input[type=text] {
+    width: 10%;
+    -webkit-transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
+}
+
+#search-form input[type=text]:focus {
+    border-bottom: 2px solid var(--dark-blue);
+    width: 20%;
+}
+
+.search-element {
+    padding-bottom: 16px;
+}
+
+.search-results {
+    background-color: rgba(5, 33, 55, .4);
 }
