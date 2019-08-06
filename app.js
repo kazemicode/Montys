@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
-
+app.engine('html', require('ejs').renderFile);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+const jsonfile = require("jsonfile");
+const jsonpath = "./public/json/page_data.json"
 
 // const pool = require("./database");
 
@@ -18,7 +20,8 @@ app.get("/products", async function(req, res) {
 });
 
 app.get("/about", async function(req, res) {
-    res.render("about");
+    var data = jsonfile.readFileSync(jsonpath);
+    res.render("about", {data});
 });
 
 app.get("/faq", async function(req, res) {

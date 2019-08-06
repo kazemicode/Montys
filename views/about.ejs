@@ -4,4 +4,25 @@
     <% include partials/navbar %>
 </div>
 
+<div id="about-content">
+    <% var history = data["about"]["history"]; %>
+    <% var awards = data["about"]["awards"] %>
+    <div class="light-content about-history">
+        <span id="history-title">The man:</span>
+        <% history.forEach(function(para) { %>
+            <p>
+                <%= para %>
+            </p><br>
+        <% }); %>
+    </div>
+    <div class="dark-content about-awards">
+        <%= awards["title"]; %>
+        <ul>
+            <% awards["list"].forEach(function(item) { %>
+                <li><%= item %></li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
 <% include partials/footer %>

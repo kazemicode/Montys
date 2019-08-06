@@ -202,6 +202,35 @@ a, body, div, footer, form, header, h1, h2, h3, html, img, nav, p, span, u {
     padding-bottom: 16px;
 }
 
-.search-results {
+/* .search-results {
     background-color: rgba(5, 33, 55, .4);
+} */
+
+#about-content {
+    display: flex;
+    max-width: 1366px;
+    margin: 0 auto;
+    padding-top: 64px;
+    justify-content: center;
+    font-family: var(--basic-font);
+}
+
+#history-title {
+    font-family: var(--fancy-font);
+    font-weight: bold;
+    font-size: 64px;
+    color: var(--medium-violet);
+}
+
+.about-history {
+    color: black;
+    flex: 50%;
+    padding: 16px 32px;
+}
+
+.about-awards {
+    color: white;
+    flex: 50%;
+    font-size: 32px;
+    padding: 16px 32px;
 }

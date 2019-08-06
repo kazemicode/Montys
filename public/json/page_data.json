@@ -1,13 +1,37 @@
 {
     "home": {
-
+        "testimonials": []
     },
-    
-    "about": {
 
+    "about": {
+        "history": [
+            "Montreux “Monty” Gutermuth was born on the cratered top of Mount Varr to a poor family of goatherders, on the one hundredth week of a drought that had sucked more than the life out of the local communities of the Varrath Valley. Yet, and many a Varrathan will, not only attest to it, but place their name and honor against any word of refute, that with the first pristine notes of the babe Monty’s voice, as the land welcomed one of its greatest gifts into its embrace, the sky wept, and the rivers overflowed with joy.",
+            "Thus, Monty bestowed his first gift unto this land.",
+            "With sustenance returned to his home, Monty would develop a lust for giving. It became his life-long mission to provide joy and wonder and good-fortune to all those in this world who may need it most.",
+            "So, at the age of ten, he stepped out onto the road at the foot of Mount Varr and began a journey that would take him from the scorched lands of Dreek, to the lost forests of Ralan, stopping only to offer his services, to lend a hand without judgement. Those he helped were very grateful, and naturally wished to show their gratitude by bestowing Monty with their possessions and valuables. This would create quite the predicament for Monty, who wanted nothing in return for his actions, yet he did not want to offend by rejecting the gesture. A compromise was made. Monty would take the gifts and use them to help others on his journey by gifting them to those who could best benefit from them.",
+            "A blow to his charitable heart, his plan did not produce the results he had hoped for.",
+            "People began to become more eager to receive gifts than to give them and Monty worried that the items were not ending up in the worthiest of hands. Again, a compromise was formed. By trading and selling the goods he procured, Monty could sustain an inventory of items that would continue to bring happiness and value to local communities. As his stock grew, individuals came forth to help him in his trade and travel along with the young benefactor. From a single boy, to a wagon-train of twenty-two, Monty had grown a community of his own.",
+            "Lit by the lightning bugs of the Elda Woods and offering wares from more than thirty providences, Monty’s Traveling Firefly Bazaar had been born.",
+            "And after years of travel and trade, Monty decided to erect a permanent establishment, where he may offer his goods and services to any and all who came calling. No longer would people wonder when Monty would return or where he may be found. With a central location, equally accessible to all, human, beast, or mer would always know where to find Pontificating Monty’s Firefly Bazaar!"
+        ],
+        "awards": {
+            "title": "Accolades, adornments, and awards:",
+            "list": [
+                "Honorary member of the Twisted Oak Enlightened",
+                "Certified Artisan, Scholar, Paragon by the Eld Tribunal",
+                "Winner of the Roselytian Prize for five consecutive years",
+                "Ordained Whisperer of the Court by the High Council",
+                "Most-Valued Citizen by the small town of Gornsbrook (one of his cherished titles)"
+            ]
+        }
     },
 
     "faq": {
+        "qa": [
+            {"question": "", "answer": ""},
+            {"question": "", "answer": ""}
+        ]
+    },
 
-    }
+    "slogan": ""
 }
