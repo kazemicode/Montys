@@ -19,6 +19,10 @@ app.get("/products", async function(req, res) {
     res.render("products", {title: "Products"});
 });
 
+app.get("/product", async function(req, res) {
+    res.render("product", {title: "Product"});
+});
+
 app.get("/about", async function(req, res) {
     var data = jsonfile.readFileSync(jsonpath);
     res.render("about", {data, title: "About"});
