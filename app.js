@@ -12,20 +12,25 @@ const jsonpath = "./public/json/page_data.json"
 
 // Root route
 app.get("/", async function(req, res) {
-    res.render("index");
+    res.render("index", {title: "Home"});
 });
 
 app.get("/products", async function(req, res) {
-    res.render("products");
+    res.render("products", {title: "Products"});
 });
 
 app.get("/about", async function(req, res) {
     var data = jsonfile.readFileSync(jsonpath);
-    res.render("about", {data});
+    res.render("about", {data, title: "About"});
 });
 
 app.get("/faq", async function(req, res) {
-    res.render("faq");
+    var data = jsonfile.readFileSync(jsonpath);
+    res.render("faq", {data, title: "FAQ"});
+});
+
+app.get("/cart", async function(req, res) {
+    res.render("cart", {title: "Cart"});
 });
 
 // Server listener

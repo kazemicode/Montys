@@ -26,12 +26,20 @@
         }
     },
 
-    "faq": {
-        "qa": [
-            {"question": "", "answer": ""},
-            {"question": "", "answer": ""}
-        ]
-    },
+    "faq": [
+        {
+            "question": "Temp question", 
+            "answer": "Temporary answer."
+        },
+        {
+            "question": "Temp question",
+            "answer": "Temporary answer."
+        },
+        {
+            "question":"Temp question",
+            "answer":"Temporary answer."
+        }
+    ],
 
     "slogan": ""
 }
