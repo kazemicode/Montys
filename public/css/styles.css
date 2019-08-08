@@ -19,6 +19,11 @@ a, body, div, footer, form, header, h1, h2, h3, html, img, nav, p, span, u {
     vertical-align: baseline;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -53,6 +58,16 @@ tr:nth-child(even) {
 .divider-bar {
     background-color: var(--bg-color-dark);
     padding: 1px;
+}
+
+.default-button {
+    background-color: var(--dark-blue);
+    font-family: var(--fancy-font);
+    font-size: 32px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 0 2px rgba(0,0,0,.4);
 }
 
 .navbar {
@@ -194,16 +209,21 @@ tr:nth-child(even) {
     text-align: right;
 }
 
-.add-to-cart {
-    font-family: var(--fancy-font);
-    font-size: 32px;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.search-content {
+    display: flex;
+    padding-top: 64px;
 }
 
 .search-filters {
-    display: block;
+    flex: 30%;
+    padding-top: 64px;
+    padding-left: 32px;
+    text-align: left;
+}
+
+.search-results {
+    flex: 70%;
+    min-height: 600px;
 }
 
 .search-title {
@@ -211,13 +231,6 @@ tr:nth-child(even) {
     font-size: 64px;
     color: var(--violet-hover);
     padding: 24px 0;
-}
-
-#search-form {
-    padding-top: 128px;
-    padding-left: 32px;
-    padding-right: 32px;
-    text-align: center;
 }
 
 #search-form label {
@@ -257,22 +270,32 @@ tr:nth-child(even) {
 }
 
 #search-form input[type=text] {
-    width: 10%;
+    width: 20%;
     -webkit-transition: 0.4s ease-in-out;
     transition: 0.4s ease-in-out;
 }
 
 #search-form input[type=text]:focus {
     border-bottom: 2px solid var(--dark-blue);
-    width: 20%;
+    width: 40%;
 }
 
 .search-element {
-    padding-bottom: 16px;
+    padding-bottom: 32px;
 }
 
-.search-results {
-    min-height: 600px;
+.search-button {
+    background-color: var
+}
+
+#result-table {
+    margin: 16px;
+}
+
+.result-labels {
+    font-family: var(--basic-font);
+    color: white;
+    font-size: 24px;
 }
 
 #about-content {
@@ -398,11 +421,6 @@ tr:nth-child(even) {
 }
 
 .checkout-button {
-    font-family: var(--fancy-font);
-    color: white;
-    font-size: 32px;
-    border: none;
-    border-radius: 4px;
     justify-content: right;
 }
 

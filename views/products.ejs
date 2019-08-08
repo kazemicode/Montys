@@ -7,36 +7,81 @@
         <span>Search our catalogue of <b>UNIQUE</b> items!</span>
     </div>
 
-    <div class="page-content search-filters">
-        <form id="search-form" method="POST" action="">
-            
-            <div class="search-element">
-            <label for="search-name">Item name</label>
-            <input type="text" name="search-name" id="search-name"/>
-            </div>
+    <div class="page-content search-content">
+        <div class="page-content search-filters">
+            <form id="search-form" method="POST" action="">
+                
+                <div class="search-element">
+                    <label for="search-name">Item name</label>
+                    <input type="text" name="search-name" id="search-name"/>
+                </div>
 
-            <div class="search-element">
-            <label for="search-category">Category</label>
-            <select id="search-category" name="search-category">
-                <option value="">Select category</option>
-            </select>
+                <div class="search-element">
+                    <label for="search-category">Category</label>
+                    <select id="search-category" name="search-category">
+                        <option value="">Select category</option>
+                    </select>
+                </div>
 
-            <label for="search-min-price">Minimum price</label>
-            <select id="search-min-price" name="search-min-price">
-                <option value="">Choose</option>
-            </select>
+                <div class="search-element">
+                    <label for="search-min-price">Minimum price</label>
+                    <select id="search-min-price" name="search-min-price">
+                        <option value="">Choose</option>
+                    </select>
+                </div>
 
-            <label for="search-max-price">Maximum price</label>
-            <select id="search-max-price" name="search-max-price">
-                <option value="">Choose</option>
-            </select>
-            </div>
-        </form>
+                <div class="search-element">
+                    <label for="search-max-price">Maximum price</label>
+                    <select id="search-max-price" name="search-max-price">
+                        <option value="">Choose</option>
+                    </select>
+                </div>
+
+                <div class="search-element">
+                    <button type="button" name="search" class="default-button">Search</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="divider-bar"></div>
+        <div class="page-content search-results">
+
+            <table id="result-table">
+
+                <tr class="dark-content result-labels">
+                    <th class="item-icon"></th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+                <tr class="light-content result-contents">
+                    <td class="item-icon"><a href="/product"><img src="/img/necronomicon.png" alt="product-image"></a></td>
+                    <td><a href="/product">Necronomicon</a></td>
+                    <td>Books</td>
+                    <td>2000g</td>
+                    <td><button class="default-button">Add to cart</button></td>
+                </tr>
+                <tr class="light-content result-contents">
+                    <td class="item-icon"><img src="/img/shield_scorched.png" alt="product-image"></td>
+                    <td>Lightly Scorched Shield</td>
+                    <td>Equipment</td>
+                    <td>500g</td>
+                    <td><button class="default-button">Add to cart</button></td>
+                </tr>
+                <tr class="light-content result-contents">
+                    <td class="item-icon"><img src="/img/partial_health_pot.png" alt="product-image"></td>
+                    <td>Half-full Health Potion</td>
+                    <td>Potion</td>
+                    <td>42g</td>
+                    <td><button class="default-button">Add to cart</button></td>
+                </tr>
+
+            </table>
+
+        </div>
     </div>
-    <div class="divider-bar"></div>
-    <div class="page-content search-results">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </div>
+    <br><br>
 </div>
 
 <% include partials/footer %>
