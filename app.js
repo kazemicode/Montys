@@ -5,6 +5,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 const jsonfile = require("jsonfile");
 const jsonpath = "./public/json/page_data.json"
+var json = jsonfile.readFileSync(jsonpath);
 
 // const pool = require("./database");
 
@@ -12,13 +13,12 @@ const jsonpath = "./public/json/page_data.json"
 
 // Root route
 app.get("/", async function(req, res) {
-    var json = jsonfile.readFileSync(jsonpath);
+    // var json = jsonfile.readFileSync(jsonpath);
     res.render("index", {title: "Home", json});
 });
 
 app.get("/products", async function(req, res) {
 
-    var json = jsonfile.readFileSync(jsonpath);
     let data = [
         {
             image: "/img/necronomicon.png",
@@ -35,7 +35,7 @@ app.get("/products", async function(req, res) {
         {
             image: "/img/partial_health_pot.png",
             name: "Half-full Health Potion",
-            category: "Potion",
+            category: "Potions",
             price: "42g"
         }
     ];
@@ -44,23 +44,19 @@ app.get("/products", async function(req, res) {
 });
 
 app.get("/product", async function(req, res) {
-    var json = jsonfile.readFileSync(jsonpath);
     res.render("product", {title: "Product", json});
 });
 
 app.get("/about", async function(req, res) {
-    var json = jsonfile.readFileSync(jsonpath);
     res.render("about", {title: "About", json});
 });
 
 app.get("/faq", async function(req, res) {
-    var json = jsonfile.readFileSync(jsonpath);
     res.render("faq", {title: "FAQ", json});
 });
 
 app.get("/cart", async function(req, res) {
-    var json = jsonfile.readFileSync(jsonpath);
-    var data = [
+    let data = [
         {
             image: "/img/necronomicon.png",
             name: "Necronomicon",
@@ -82,6 +78,10 @@ app.get("/cart", async function(req, res) {
     ];
 
     res.render("cart", {title: "Cart", json, data});
+});
+
+app.get("/login", async function(req, res) {
+    res.render("login", {title: "Login"});
 });
 
 // Server listener

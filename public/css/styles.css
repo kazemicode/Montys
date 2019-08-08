@@ -444,6 +444,12 @@ tr:nth-child(even) {
     min-height: 128px;
 }
 
+.login-link {
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--dark-blue);
+}
+
 footer {
     max-width: 1366px;
     margin: 0 auto;
