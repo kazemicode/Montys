@@ -1,0 +1,26 @@
+<% include partials/header %>
+
+<% include partials/navbar %>
+
+<div id="about-content">
+    <% var history = json["about"]["history"]; %>
+    <% var awards = json["about"]["awards"] %>
+    <div class="light-content about-history">
+        <span id="history-title">The man:</span>
+        <% history.forEach(function(para) { %>
+            <p>
+                <%= para %>
+            </p><br>
+        <% }); %>
+    </div>
+    <div class="dark-content about-awards">
+        <%= awards["title"]; %>
+        <ul>
+            <% awards["list"].forEach(function(item) { %>
+                <li><%= item %></li>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+
+<% include partials/footer %>

@@ -1,0 +1,41 @@
+<% include partials/header %>
+
+<% include partials/navbar %>
+
+<div class="page-content light-content cart-header">
+    <span>Cart</span>
+</div>
+
+<hr><br>
+
+<div class="cart-cushion"></div>
+
+<div class="page-content">
+    <table id="cart-table">
+        <tr class="dark-content cart-labels">
+            <th class="item-icon"></th>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+        </tr>
+        <% data.forEach(function(element) { %>
+            <tr class="light-content cart-contents">
+                <td class="item-icon">
+                    <a href="/product"><img src="<%= element['image'] %>" alt="product-image"></a>
+                </td>
+                <td><a href="/product"><%= element["name"] %></a></td>
+                <td><%= element["price"] %></td>
+                <td><%= element["quantity"] %></td>
+                <td><button class="remove-cart-item">X</button></td>
+            </tr>
+        <% }); %>
+        
+    </table>
+    <hr>
+    <span class="page-content light-content cart-subtotal"> 32 items - <b>Subtotal:</b> 2542g<br><br>
+        <button class="default-button checkout-button">Checkout</button></span>
+    <div class="cart-cushion"></div>
+</div>
+
+<% include partials/footer %>
