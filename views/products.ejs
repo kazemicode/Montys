@@ -55,28 +55,17 @@
                     <th>Price</th>
                     <th></th>
                 </tr>
-                <tr class="light-content result-contents">
-                    <td class="item-icon"><a href="/product"><img src="/img/necronomicon.png" alt="product-image"></a></td>
-                    <td><a href="/product">Necronomicon</a></td>
-                    <td>Books</td>
-                    <td>2000g</td>
-                    <td><button class="default-button">Add to cart</button></td>
-                </tr>
-                <tr class="light-content result-contents">
-                    <td class="item-icon"><img src="/img/shield_scorched.png" alt="product-image"></td>
-                    <td>Lightly Scorched Shield</td>
-                    <td>Equipment</td>
-                    <td>500g</td>
-                    <td><button class="default-button">Add to cart</button></td>
-                </tr>
-                <tr class="light-content result-contents">
-                    <td class="item-icon"><img src="/img/partial_health_pot.png" alt="product-image"></td>
-                    <td>Half-full Health Potion</td>
-                    <td>Potion</td>
-                    <td>42g</td>
-                    <td><button class="default-button">Add to cart</button></td>
-                </tr>
-
+                <% data.forEach(function(element) { %>
+                    <tr class="light-content result-contents">
+                        <td class="item-icon">
+                            <a href="/product"><img src="<%= element["image"] %>"></a>
+                        </td>
+                        <td><a href="/product"><%= element["name"] %></a></td>
+                        <td><%= element["category"] %></td>
+                        <td><%= element["price"] %></td>
+                        <td><button class="default-button">Add to cart</button></td>
+                    </tr>
+                <% }); %>
             </table>
 
         </div>

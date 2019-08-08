@@ -1,6 +1,11 @@
 {
     "home": {
-        "testimonials": []
+        "intro": [
+            "Welcome to Pontificating Monty's Firefly Bazaar!",
+            "Offering only the BEST in lightly* used goods from the country's upper-class, elite, and Beyond!",
+            "This digital portal offers a glimpse, a taste, of the wide-variety of products one may find at Monty's.",
+            "*level of wear to goods varies by product"
+        ]
     },
 
     "about": {
@@ -28,18 +33,26 @@
 
     "faq": [
         {
-            "question": "Temp question", 
-            "answer": "Temporary answer."
+            "question": "What is the return policy?", 
+            "answer": "After scouring our records and policies, there seems to be no mention of that which you speak."
         },
         {
-            "question": "Temp question",
-            "answer": "Temporary answer."
+            "question": "This item is cursed.",
+            "answer": "While many of us at Monty's understand your concern, that is not in the form of a question. Additionally, we must ask you to not bring the item in. Curses are extremely contagious."
         },
         {
-            "question":"Temp question",
-            "answer":"Temporary answer."
+            "question": "I have a question about (insert item). Who may I contact?",
+            "answer": "Monty's is a first-class, premium retailer that only deals in the finest goods. To maintain a high standard of salesmanship and an orderly retail environment, we must direct all of our attention to the sale of a product. To tend to every concern or whim of the end-user would greatly hinder our ability to do business, meaning that a inconvenient compromise must be made."
+        },
+        {
+            "question": "What are the costs of shipping?",
+            "answer": "For national, international, and interdimensional shipping, we charge a flat rate of 1000g, plus another 10g for every limb lost by the delivery person and another 5000g if their uniform is ruined. We do offer FREE SHIPPING to those lucky customers that hail from the Void. Unfortunately, due to the paradoxical nature of the Void, your item has probably already arrived and yet has not been shipped at any given point in time (please direct all further concerns to your local demonlord or assigned torturer)."
+        },
+        {
+            "question": "Can I speak with Monty?",
+            "answer": "Monty has an arrangement with many local practioners of discriminated magics. To schedule an appointment, seek out one of these misunderstood magicians (you can usually find them in swamps, mountain caves, or a hut in the deepest part of the woods; if you see bones strung from branches, you're on the right track). Be sure to bring them a gift for their service! A ceromonial dagger would be the best choice."
         }
     ],
 
-    "slogan": ""
+    "slogan": "Don't become a victim of the caste-system...elevate your life at Pontificating Monty's Firefly Bazaar!"
 }

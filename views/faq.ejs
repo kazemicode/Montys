@@ -8,7 +8,7 @@
 
 <div class="page-content light-content faq-content">
 
-    <% data["faq"].forEach(function(block) { %>
+    <% json["faq"].forEach(function(block) { %>
         <div class="faq-block">
             <span class="faq-q">Q: </span><span class="faq-question"><%= block["question"] %></span><br>
             <span class="faq-a">A: </span><span class="faq-answer"><%= block["answer"] %></span><br><br>
@@ -17,5 +17,6 @@
     <% }); %>
 
 </div>
+<br><br>
 
 <% include partials/footer %>

@@ -8,6 +8,7 @@
     --light-yellow: rgb(240, 194, 151);
     --dark-violet: rgb(16, 7, 38);
     --medium-violet: rgb(34, 0, 41);
+    --light-violet: rgb(255, 65, 125);
     margin: auto;
 }
 
@@ -93,12 +94,12 @@ tr:nth-child(even) {
 }
 
 .navbar a:hover {
-    color: var(--violet-hover);
+    color: var(--light-violet);
     transition: 0.7s;
 }
 
 .current-page {
-    color: var(--violet-hover) !important;
+    color: var(--light-violet) !important;
 }
 
 #nav-logo {
@@ -146,15 +147,30 @@ tr:nth-child(even) {
     z-index: 100;
 }
 
-.featured {
+.home-intro {
+    font-family: var(--fancy-font);
+    font-size: 24px;
+    color: var(--medium-violet);
+}
+
+.featured-content {
     text-align: center;
 }
 
-#home-featured {
+#featured-title {
     font-family: var(--fancy-font);
     color: var(--light-yellow);
     font-size: 64px;
     font-style: italic;
+}
+
+.featured-items {
+    min-height: 400px;
+}
+
+.slogan {
+    font-family: var(--fancy-font);
+    color: var(--violet-hover);
 }
 
 .product-name {

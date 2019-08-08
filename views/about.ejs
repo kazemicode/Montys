@@ -3,8 +3,8 @@
 <% include partials/navbar %>
 
 <div id="about-content">
-    <% var history = data["about"]["history"]; %>
-    <% var awards = data["about"]["awards"] %>
+    <% var history = json["about"]["history"]; %>
+    <% var awards = json["about"]["awards"] %>
     <div class="light-content about-history">
         <span id="history-title">The man:</span>
         <% history.forEach(function(para) { %>
