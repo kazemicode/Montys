@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/nwarcord/CST336_Final_Project#readme",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
+    "express-session": "^1.16.2",
     "jsonfile": "^5.0.0",
     "mysql": "^2.17.1",
     "request": "^2.88.0"
