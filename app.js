@@ -49,45 +49,45 @@ app.post("/products/add", function(req, res) {
 /* CART */
 /********/
 // Add new product to cart
-app.post("/cart/add", function(req, res) {
+app.post("/cart/:sessionid/add", function(req, res) {
   var sql = "INSERT INTO cart(sessionid, productid, quantity, unitprice, totalprice) VALUES(?,?,?,?,?)";
-  var sqlParams = [req.query.sessionid, req.query.productid, req.query.quantity, req.query.price, (req.query.quantity * req.query.price)];
+  var sqlParams = [req.params.sessionid, req.query.productid, req.query.quantity, req.query.price, (req.query.quantity * req.query.price)];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
 });
 
 // Remove product from to cart
-app.delete("/cart/remove", function(req, res) {
+app.delete("/cart/:sessionid/productid/remove", function(req, res) {
   var sql = "DELETE FROM cart WHERE sessionid = ? AND productid = ?";
-  var sqlParams = [req.query.sessionid, req.query.sessionid];
+  var sqlParams = [req.params.sessionid, req.params.productid];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
 });
 
 // Empty cart
-app.delete("/cart/empty", function(req, res) {
+app.delete("/cart/:sessionid/empty", function(req, res) {
   var sql = "DELETE FROM cart WHERE sessionid = ?";
-  var sqlParams = [req.query.sessionid];
+  var sqlParams = [req.params.sessionid];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
 });
 
 // Retrieve total quantity of products in cart
-app.get("/cart/quantity", function(req, res) {
+app.get("/cart/:sessionid/quantity", function(req, res) {
   var sql = "SELECT SUM(quantity) FROM cart WHERE sessionid = ?";
-  var sqlParams = [req.query.sessionid];
+  var sqlParams = [req.params.sessionid];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
 });
 
 // Retrieve total cost of products in cart
-app.get("/cart/total", function(req, res) {
+app.get("/cart/:sessionid/total", function(req, res) {
   var sql = "SELECT SUM(totalprice) FROM cart WHERE sessionid = ?";
-  var sqlParams = [req.query.sessionid];
+  var sqlParams = [req.params.sessionid];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
