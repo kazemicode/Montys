@@ -14,20 +14,28 @@ const pool = require("./database");
 // };)
 
 /* Monty's API Routes */
+// Note: req.params gets data passed in via the request body -- use with router params (preceded by ':')
+//       req.query  gets data passed in via the request query string 
+// Add new product to cart
 
 /* PRODUCTS */
 /************/
+
+// TO DO: Get product based off category (drop down search)
+// Get product based off name (string-based form search)
+
 // Get product based off id
-app.get("/products/", function(req, res) {
+// Product id is passed through request body
+app.get("/products/:productid", function(req, res) {
   var sql = "SELECT * FROM products WHERE productid = ?"
-  var sqlParams = [req.query.productid];
+  var sqlParams = [req.params.productid];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
 });
 
-
 // Get three random products
+// No params needed
 app.get("/products/random", function(req, res) {
 
   var sql = "SELECT * FROM products ORDER BY Rand() LIMIT 3"
@@ -37,6 +45,7 @@ app.get("/products/random", function(req, res) {
 });
 
 // Add new product to the table
+// All params are passed through a form POST
 app.post("/products/add", function(req, res) {
   var sql = "INSERT INTO products(productid, category, name, desciprtion, price, imgURL, imgDescription) VALUES(?,?,?,?,?,?,?)";
   var sqlParams = [req.query.productid, req.query.category, req.query.name, req.query.description, req.query.price, req.query.imgURL, req.query.imgDescription];
@@ -48,7 +57,10 @@ app.post("/products/add", function(req, res) {
 
 /* CART */
 /********/
-// Add new product to cart
+
+// Add a product to cart
+// Session id is passed through request body
+// All other params passed through a query string
 app.post("/cart/:sessionid/add", function(req, res) {
   var sql = "INSERT INTO cart(sessionid, productid, quantity, unitprice, totalprice) VALUES(?,?,?,?,?)";
   var sqlParams = [req.params.sessionid, req.query.productid, req.query.quantity, req.query.price, (req.query.quantity * req.query.price)];
@@ -58,6 +70,7 @@ app.post("/cart/:sessionid/add", function(req, res) {
 });
 
 // Remove product from to cart
+// Session id and product id are passed through the request body
 app.delete("/cart/:sessionid/productid/remove", function(req, res) {
   var sql = "DELETE FROM cart WHERE sessionid = ? AND productid = ?";
   var sqlParams = [req.params.sessionid, req.params.productid];
@@ -67,6 +80,7 @@ app.delete("/cart/:sessionid/productid/remove", function(req, res) {
 });
 
 // Empty cart
+// Session id is passed through the request body
 app.delete("/cart/:sessionid/empty", function(req, res) {
   var sql = "DELETE FROM cart WHERE sessionid = ?";
   var sqlParams = [req.params.sessionid];
@@ -76,6 +90,7 @@ app.delete("/cart/:sessionid/empty", function(req, res) {
 });
 
 // Retrieve total quantity of products in cart
+// Session id is passed through the request body
 app.get("/cart/:sessionid/quantity", function(req, res) {
   var sql = "SELECT SUM(quantity) FROM cart WHERE sessionid = ?";
   var sqlParams = [req.params.sessionid];
@@ -85,6 +100,7 @@ app.get("/cart/:sessionid/quantity", function(req, res) {
 });
 
 // Retrieve total cost of products in cart
+// Session id is passed through the request body
 app.get("/cart/:sessionid/total", function(req, res) {
   var sql = "SELECT SUM(totalprice) FROM cart WHERE sessionid = ?";
   var sqlParams = [req.params.sessionid];
@@ -96,9 +112,10 @@ app.get("/cart/:sessionid/total", function(req, res) {
 /* ORDERS */
 /**********/
 // Add new product to orders
-app.post("/orders/add", function(req, res) {
+// Session id is passed through the request body
+app.post("/orders/:sessionid/add", function(req, res) {
   var sql = "INSERT INTO orders(sessionid, productid, quantity, unitprice, totalprice) VALUES(SELECT * FROM cart WHERE sessionid = ?)";
-  var sqlParams = [req.query.sessionid];
+  var sqlParams = [req.params.sessionid];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
