@@ -21,8 +21,26 @@ const pool = require("./database");
 /* PRODUCTS */
 /************/
 
-// TO DO: Get product based off category (drop down search)
+// Get product based off category (submitted via drop down search)
+// Category is passed through query string
+app.get("/searchByCategory", function(req, res) {
+  var sql = "SELECT * FROM products WHERE category = ?"
+  var sqlParams = [req.query.category];
+  pool.query(sql, sqlParams, function(err, result) {
+    if (err) throw err;
+  });
+});
+
 // Get product based off name (string-based form search)
+// Name is passed through query string
+app.get("/searchByName", function(req, res) {
+  var sql = "SELECT * FROM products WHERE name = ?"
+  var sqlParams = [req.query.name];
+  pool.query(sql, sqlParams, function(err, result) {
+    if (err) throw err;
+  });
+});
+
 
 // Get product based off id
 // Product id is passed through request body
