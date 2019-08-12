@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
-const session = require('express-session');
-const bcrypt = require('bcrypt');
-const mysql = require('mysql');
-
+app.engine('html', require('ejs').renderFile);
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+const session = require("express-session");
+const bcrypt = require("bcrypt");
+const jsonfile = require("jsonfile");
+const jsonpath = "./public/json/page_data.json"
+var json = jsonfile.readFileSync(jsonpath);
 
 app.use(session({
     secret: "top secret!",
@@ -17,112 +19,146 @@ app.use(express.urlencoded({extended: true})); // to be able to parse POST param
 
 const pool = require("./database");
 
+app.use(session({
+    secret: "top secret!",
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(express.urlencoded({extended: true}));
+
 // Routes
 
 // Root route
-app.get("/", function(req, res){
-    res.render("index");
- });
-// app.get("/", async function(req, res) {
-    // Do stuff
-// });
-
-app.post("/signin", async function(req, res){
-    let username = req.body.username;
-    let password = req.body.password;
-    // console.log("username:" + username);
-    // console.log("password:" + password);
-    let result = await checkUsername(username);
-    // console.dir(result);
-    console.log(result[0].username);
-    console.log(result[0].Password);
-    let hashedPwd = "";
- 
-    if(result.length > 0 ){
-       hashedPwd = result[0].Password;
-    }
- 
-    let passwordMatch = await checkPassword(password, hashedPwd);
-    console.log("passwordMatch: " + passwordMatch);
- 
-    if (username == result[0].username && passwordMatch){
-       req.session.authenticated = true;
-       res.render("welcome");
-    } else {
-       res.render("index", {"loginError": true});
-    }
- });//post route
-
- /** 
- * Checks whether the username exists in database.
- * if found, returns corresponding record
- * @param {string} username
- * @return {array of objects}
- */
-function checkUsername(username){
-    let sql = "SELECT * FROM users WHERE username = ?";
-    return new Promise( function(resolve, reject){
-       let conn = createDBConnection();
-       conn.connect(function(err) {
-          if(err) throw err;
-          conn.query(sql, [username], function(err, rows, fields) {
-             if (err) throw err;
-             console.log("Rows found: " + rows.length);
-             resolve(rows);
-          });//query
-       });//connect 
-    });//promise
- }
- 
- app.get("/myAccount", isAuthenticated, function(req, res) {
-    res.render("account");   
- });//myAccount
- 
- function isAuthenticated(req, res, next) {
-    if(!req.session.authenticated) {
-       res.redirect('/');
-    } else {
-       next()
-    }
- }
- app.get("/signin", function(req, res) {
-    res.render("signin");
- });//logout
-
- app.get("/logout", function(req, res) {
-    req.session.destroy();
-    res.redirect("/");
- });//logout
- 
- function createDBConnection() {
-    var conn = mysql.createConnection({
-                host: "localhost",
-                user: "root",
-                password: "sesame",
-                database: "scsi_logic"
-    });
-    return conn;
- }
- /**
-  * Checks the bcrpt value of the password submitted
-  * @param {string} password
-  * @return {boolean} true if password submitted is equal to
-  *                   bcrypt-hashed value, fasle otherwise.
-  */
- function checkPassword(password, hashedValue){
-    return new Promise(function(resolve, reject) {
-       bcrypt.compare(password, hashedValue, function(err, result) {
-          console.log("Result: " + result);
-          resolve(result);
-       });
-    });
- }
-
-// Server listener
-app.listen("8081", "127.0.0.1", function() {
-    console.log("Express server is running...");
+app.get("/", async function(req, res) {
+    res.render("index", {title: "Home", json});
 });
 
-// app.listen(process.env.PORT, process.env.IP, function() {
-//     console.log("Running Express Server...");
+app.get("/products", async function(req, res) {
+
+    let data = [
+        {
+            image: "/img/necronomicon.png",
+            name: "Necronomicon",
+            category: "Books",
+            price: "2000g"
+        },
+        {
+            image: "/img/shield_scorched.png",
+            name: "Lightly Scorched Shield",
+            category: "Equipment",
+            price: "500g"
+        },
+        {
+            image: "/img/partial_health_pot.png",
+            name: "Half-full Health Potion",
+            category: "Potions",
+            price: "42g"
+        }
+    ];
+
+    res.render("products", {title: "Products", json, data});
+});
+
+app.get("/product", async function(req, res) {
+    res.render("product", {title: "Product", json});
+});
+
+app.get("/about", async function(req, res) {
+    res.render("about", {title: "About", json});
+});
+
+app.get("/faq", async function(req, res) {
+    res.render("faq", {title: "FAQ", json});
+});
+
+app.get("/cart", async function(req, res) {
+    let data = [
+        {
+            image: "/img/necronomicon.png",
+            name: "Necronomicon",
+            price: "2000g",
+            quantity: "20"
+        },
+        {
+            image: "/img/shield_scorched.png",
+            name: "Lightly Scorched Shield",
+            price: "500g",
+            quantity: "8"
+        },
+        {
+            image: "/img/partial_health_pot.png",
+            name: "Half-full Health Potion",
+            price: "42g",
+            quantity: "4"
+        }
+    ];
+
+    res.render("cart", {title: "Cart", json, data});
+});
+
+app.get("/login", function(req, res) {
+    res.render("login", {title: "Login"});
+});
+
+app.post("/login", async function(req, res) {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    let result = await checkUsername(username);
+    let hashedPwd = "";
+    let usernameValue = "";
+
+    if (result.length > 0) {
+        usernameValue = result[0].username;
+        hashedPwd = result[0].password;
+    }
+
+    let passwordMatch = await checkPassword(password, hashedPwd);
+
+    if (username == usernameValue && passwordMatch) {
+        req.session.authenticated = true;
+        res.render("admin", {title: "Admin"});
+    }
+    else {
+        res.render("login", {loginError: true, title: "Login"});
+    }
+});
+
+app.get("/admin", function(req, res) {
+    res.render("admin", {title: "Admin"});
+});;
+
+app.get("/logout", function(req, res) {
+    req.session.destroy();
+    res.redirect("/");
+});
+
+// Functions
+
+function checkUsername(username) {
+    let sql = "SELECT * FROM users WHERE username = ?";
+    return new Promise(function (resolve, reject) {
+        pool.query(sql, [username], function(err, rows, fields) {
+            if (err) throw err;
+            resolve(rows);
+        });
+    });
+}
+
+function checkPassword(password, hashedValue) {
+    return new Promise(function (resolve, reject) {
+        bcrypt.compare(password, hashedValue, function(err, result) {
+            resolve(result);
+        });
+    });
+}
+
+// Server listener
+// app.listen("8081", "127.0.0.1", function() {
+//     console.log("Express server is running...");
 // });
+
+app.listen(process.env.PORT, process.env.IP, function() {
+    console.log("Running Express Server...");
+});

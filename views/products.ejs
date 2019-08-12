@@ -1,0 +1,76 @@
+<% include partials/header %>
+
+<% include partials/navbar %>
+
+<div class="light-content">
+    <div class="span-center search-title">
+        <span>Search our catalogue of <b>UNIQUE</b> items!</span>
+    </div>
+
+    <div class="page-content search-content">
+        <div class="page-content search-filters">
+            <form id="search-form" method="POST" action="">
+                
+                <div class="search-element">
+                    <label for="search-name">Item name</label>
+                    <input type="text" name="search-name" id="search-name"/>
+                </div>
+
+                <div class="search-element">
+                    <label for="search-category">Category</label>
+                    <select id="search-category" name="search-category">
+                        <option value="">Select category</option>
+                    </select>
+                </div>
+
+                <div class="search-element">
+                    <label for="search-min-price">Minimum price</label>
+                    <select id="search-min-price" name="search-min-price">
+                        <option value="">Choose</option>
+                    </select>
+                </div>
+
+                <div class="search-element">
+                    <label for="search-max-price">Maximum price</label>
+                    <select id="search-max-price" name="search-max-price">
+                        <option value="">Choose</option>
+                    </select>
+                </div>
+
+                <div class="search-element">
+                    <button type="button" name="search" class="default-button">Search</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="divider-bar"></div>
+        <div class="page-content search-results">
+
+            <table id="result-table">
+
+                <tr class="dark-content result-labels">
+                    <th class="item-icon"></th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+                <% data.forEach(function(element) { %>
+                    <tr class="light-content result-contents">
+                        <td class="item-icon">
+                            <a href="/product"><img src="<%= element["image"] %>"></a>
+                        </td>
+                        <td><a href="/product"><%= element["name"] %></a></td>
+                        <td><%= element["category"] %></td>
+                        <td><%= element["price"] %></td>
+                        <td><button class="default-button">Add to cart</button></td>
+                    </tr>
+                <% }); %>
+            </table>
+
+        </div>
+    </div>
+    <br><br>
+</div>
+
+<% include partials/footer %>
