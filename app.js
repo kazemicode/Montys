@@ -64,9 +64,10 @@ app.get("/products/random", function(req, res) {
 
 // Add new product to the table
 // All params are passed through a form POST
+// Note: Product ID gets autoincremented, so is not passed in
 app.post("/products/add", function(req, res) {
-  var sql = "INSERT INTO products(productId, name, category, description, price, imgURL) VALUES(?,?,?,?,?,?)";
-  var sqlParams = [req.query.productId, req.query.name, req.query.category, req.query.description, req.query.price, req.query.imgURL];
+  var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?,?)";
+  var sqlParams = [req.query.name, req.query.category, req.query.description, req.query.price, req.query.imgURL];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -78,10 +79,11 @@ app.post("/products/add", function(req, res) {
 
 // Add a product to cart
 // Session id is passed through request body
+// Note: Cart ID gets autoincremented, so is not passed in
 // All other params passed through a query string
 app.post("/cart/:sessionId/add", function(req, res) {
-  var sql = "INSERT INTO cart(cartId, sessionId, productId, qty, price, category) VALUES(?,?,?,?,?,?)";
-  var sqlParams = [, req.params.sessionId, req.query.productId, req.query.quantity, req.query.price, (req.query.quantity * req.query.price), req.query.category];
+  var sql = "INSERT INTO cart(sessionId, productId, qty, price, category) VALUES(?,?,?,?,?,?)";
+  var sqlParams = [req.params.sessionId, req.query.productId, req.query.quantity, req.query.price, (req.query.quantity * req.query.price), req.query.category];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -131,6 +133,7 @@ app.get("/cart/:sessionId/total", function(req, res) {
 /**********/
 // Add new product to orders
 // Session id is passed through the request body
+// Note: cart ID becomes order ID
 app.post("/orders/:sessionId/add", function(req, res) {
   var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(SELECT * FROM cart WHERE sessionId = ?)";
   var sqlParams = [req.params.sessionId];
