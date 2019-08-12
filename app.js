@@ -44,9 +44,9 @@ app.get("/searchByName", function(req, res) {
 
 // Get product based off id
 // Product id is passed through request body
-app.get("/products/:productid", function(req, res) {
-  var sql = "SELECT * FROM products WHERE productid = ?"
-  var sqlParams = [req.params.productid];
+app.get("/products/:productId", function(req, res) {
+  var sql = "SELECT * FROM products WHERE productId = ?"
+  var sqlParams = [req.params.productId];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -65,8 +65,8 @@ app.get("/products/random", function(req, res) {
 // Add new product to the table
 // All params are passed through a form POST
 app.post("/products/add", function(req, res) {
-  var sql = "INSERT INTO products(productid, category, name, desciprtion, price, imgURL, imgDescription) VALUES(?,?,?,?,?,?,?)";
-  var sqlParams = [req.query.productid, req.query.category, req.query.name, req.query.description, req.query.price, req.query.imgURL, req.query.imgDescription];
+  var sql = "INSERT INTO products(productId, name, category, description, price, imgURL) VALUES(?,?,?,?,?,?)";
+  var sqlParams = [req.query.productId, req.query.name, req.query.category, req.query.description, req.query.price, req.query.imgURL];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -79,9 +79,9 @@ app.post("/products/add", function(req, res) {
 // Add a product to cart
 // Session id is passed through request body
 // All other params passed through a query string
-app.post("/cart/:sessionid/add", function(req, res) {
-  var sql = "INSERT INTO cart(sessionid, productid, quantity, unitprice, totalprice) VALUES(?,?,?,?,?)";
-  var sqlParams = [req.params.sessionid, req.query.productid, req.query.quantity, req.query.price, (req.query.quantity * req.query.price)];
+app.post("/cart/:sessionId/add", function(req, res) {
+  var sql = "INSERT INTO cart(cartId, sessionId, productId, qty, price, category) VALUES(?,?,?,?,?,?)";
+  var sqlParams = [, req.params.sessionId, req.query.productId, req.query.quantity, req.query.price, (req.query.quantity * req.query.price), req.query.category];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -89,9 +89,9 @@ app.post("/cart/:sessionid/add", function(req, res) {
 
 // Remove product from to cart
 // Session id and product id are passed through the request body
-app.delete("/cart/:sessionid/productid/remove", function(req, res) {
-  var sql = "DELETE FROM cart WHERE sessionid = ? AND productid = ?";
-  var sqlParams = [req.params.sessionid, req.params.productid];
+app.delete("/cart/:sessionId/productId/remove", function(req, res) {
+  var sql = "DELETE FROM cart WHERE sessionId = ? AND productId = ?";
+  var sqlParams = [req.params.sessionId, req.params.productId];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -99,9 +99,9 @@ app.delete("/cart/:sessionid/productid/remove", function(req, res) {
 
 // Empty cart
 // Session id is passed through the request body
-app.delete("/cart/:sessionid/empty", function(req, res) {
-  var sql = "DELETE FROM cart WHERE sessionid = ?";
-  var sqlParams = [req.params.sessionid];
+app.delete("/cart/:sessionId/empty", function(req, res) {
+  var sql = "DELETE FROM cart WHERE sessionId = ?";
+  var sqlParams = [req.params.sessionId];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -109,9 +109,9 @@ app.delete("/cart/:sessionid/empty", function(req, res) {
 
 // Retrieve total quantity of products in cart
 // Session id is passed through the request body
-app.get("/cart/:sessionid/quantity", function(req, res) {
-  var sql = "SELECT SUM(quantity) FROM cart WHERE sessionid = ?";
-  var sqlParams = [req.params.sessionid];
+app.get("/cart/:sessionId/quantity", function(req, res) {
+  var sql = "SELECT SUM(qty * price) FROM cart WHERE sessionId = ?";
+  var sqlParams = [req.params.sessionId];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -119,9 +119,9 @@ app.get("/cart/:sessionid/quantity", function(req, res) {
 
 // Retrieve total cost of products in cart
 // Session id is passed through the request body
-app.get("/cart/:sessionid/total", function(req, res) {
-  var sql = "SELECT SUM(totalprice) FROM cart WHERE sessionid = ?";
-  var sqlParams = [req.params.sessionid];
+app.get("/cart/:sessionId/total", function(req, res) {
+  var sql = "SELECT SUM(price) FROM cart WHERE sessionId = ?";
+  var sqlParams = [req.params.sessionId];
   pool.query(sql, sqlParams, function(err, result) {
     if (err) throw err;
   });
@@ -131,10 +131,18 @@ app.get("/cart/:sessionid/total", function(req, res) {
 /**********/
 // Add new product to orders
 // Session id is passed through the request body
-app.post("/orders/:sessionid/add", function(req, res) {
-  var sql = "INSERT INTO orders(sessionid, productid, quantity, unitprice, totalprice) VALUES(SELECT * FROM cart WHERE sessionid = ?)";
-  var sqlParams = [req.params.sessionid];
+app.post("/orders/:sessionId/add", function(req, res) {
+  var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(SELECT * FROM cart WHERE sessionId = ?)";
+  var sqlParams = [req.params.sessionId];
   pool.query(sql, sqlParams, function(err, result) {
+    if (err) throw err;
+  });
+});
+
+// Returns a report of total number of orders, total quantity of items, and total revenue -- grouped by product category
+app.post("/orders/report", function(req, res){
+  var sql = 'SELECT SUM(DISTINCT orderId) as totalOrders, SUM(qty) as totalItems, SUM(price*qty) as totalRevenue FROM orders GROUP BY ROLLUP(category)';
+  pool.query(sql, function(err, result) {
     if (err) throw err;
   });
 });
