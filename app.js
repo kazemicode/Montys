@@ -155,10 +155,10 @@ function checkPassword(password, hashedValue) {
 }
 
 // Server listener
-// app.listen("8081", "127.0.0.1", function() {
-//     console.log("Express server is running...");
-// });
-
-app.listen(process.env.PORT, process.env.IP, function() {
-    console.log("Running Express Server...");
+app.listen("8081", "127.0.0.1", function() {
+    console.log("Express server is running...");
 });
+
+// app.listen(process.env.PORT, process.env.IP, function() {
+//     console.log("Running Express Server...");
+// });
