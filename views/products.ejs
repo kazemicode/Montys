@@ -48,24 +48,8 @@
 
             <table id="result-table">
 
-                <tr class="dark-content result-labels">
-                    <th class="item-icon"></th>
-                    <th>Item Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-                <% data.forEach(function(element) { %>
-                    <tr class="light-content result-contents">
-                        <td class="item-icon">
-                            <a href="/product"><img src="<%= element["image"] %>"></a>
-                        </td>
-                        <td><a href="/product"><%= element["name"] %></a></td>
-                        <td><%= element["category"] %></td>
-                        <td><%= element["price"] %></td>
-                        <td><button class="default-button">Add to cart</button></td>
-                    </tr>
-                <% }); %>
+                <!-- Search results will populate here -->
+                
             </table>
 
         </div>
