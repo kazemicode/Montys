@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    $(".loading-image").hide();
+
     // Called when clicking on the "Add to cart" button (product page)
     // Sends the productId, quantity specified, and price to the server
     $(".add-to-cart").on("click", function() {
@@ -8,9 +10,7 @@ $(document).ready(function() {
         var productId = window.location.pathname.split("/").pop();
         var price = $("#product-price b").text().split(" ").pop().replace('g', '');
         var quantity = $(".product-quantity").val();
-
-        console.log(price);
-        console.log(quantity);
+        $(".loading-image").show();
 
         $.ajax({
             method: "POST",
@@ -20,9 +20,22 @@ $(document).ready(function() {
                 price,
                 quantity
             },
-            success: function() {
-                window.location.replace("cart.ejs");
-            }
+            success: function(success) {
+                if (success) {
+                    window.location.replace("/cart");
+                    window.onload = function() {
+                        $(".loading-image").hide();
+                    }
+                }
+            },
+            error: function(error) {
+                alert("An unexpected error occured" + error);
+                window.location.replace("/products/" + productId);
+                window.onload = function() {
+                    $(".loading-image").hide();
+                }
+            }  
+            
         });
 
     });

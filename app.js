@@ -149,6 +149,7 @@ app.post("/cart/add", async function(req, res) {
     var sqlParams = [req.session.id, req.body.productId, req.body.quantity, req.body.price, productCategory[0].category, req.body.quantity];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
 
