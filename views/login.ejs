@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pontificating Monty's Firefly Bazaar - <%= title %></title>
-</head>
-<body>
+<% include partials/header %>
+
+
+<% include partials/navbar %>
+<div class="admin-login">
     <form method="POST">
 
-        Username: <input type="text" name="username">
+        Username: <input type="text" name="username" size="20">
         <br>
         Password: <input type="password" name="password">
         <br>
-        <button>
-           Login!
-        </button>
+        <button>Login!</button>
      </form>
   
      <% if (typeof loginError != "undefined" && loginError) {%>
@@ -22,5 +18,4 @@
   
         <% }%>
      
-</body>
-</html>
+    </div>

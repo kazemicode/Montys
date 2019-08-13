@@ -222,7 +222,8 @@ app.post("/login", async function(req, res) {
     let passwordMatch = await checkPassword(password, hashedPwd);
 
     if (username == usernameValue && passwordMatch) {
-        req.session.authenticated = true;
+        req.session.authenticated = true;          
+
         res.render("admin", {title: "Admin"});
     }
     else {
@@ -230,9 +231,23 @@ app.post("/login", async function(req, res) {
     }
 });
 
-app.get("/admin", function(req, res) {
-    res.render("admin", {title: "Admin"});
-});;
+app.get("/addProduct", function(req,res){
+
+
+    res.render("addProduct", {title: "Admin"});
+});
+
+app.get("/removeProduct", async function(req,res){
+    let products = await getProducts();    
+    
+    res.render("removeProduct", {title: "Admin", data: products});
+});
+
+app.get("/updateProduct", async function(req,res){
+    let products = await getProducts();    
+    
+    res.render("updateProduct", {title: "Admin", data: products});
+});
 
 app.get("/logout", function(req, res) {
     req.session.destroy();
@@ -293,6 +308,19 @@ function getCartContents(sessionId) {
     return new Promise(function(resolve, reject) {
         pool.query(sql, sqlParams, function(err, rows) {
             if (err) throw err;
+            resolve(rows);
+        });
+    });
+}
+
+// Returns all rows within the product table
+function getProducts() {
+    let sql = "SELECT * FROM products";
+    
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, function(err, rows) {
+            if (err) throw err;
+            console.log(rows);
             resolve(rows);
         });
     });
