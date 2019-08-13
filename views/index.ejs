@@ -1,3 +1,36 @@
 <% include partials/header %>
 
+
+<% include partials/navbar %>
+
+<div class="page-content">
+    <div class="head-graphic">
+        <img id="head-image" src="img/fireflies2.jpg" alt="firefly_photo">
+        <img id="head-text" src="img/banner.png" alt="logo">
+    </div>
+</div>
+<br><br><br><br>
+<hr>
+<br>
+
+<div class="light-content page-content home-intro">
+    <% json["home"]["intro"].forEach(function(line) { %>
+        <span><%= line %></span><br>
+    <% }); %>
+</div>
+<br>
+<hr>
+
+<div class="page-content">
+        <br><br>
+        <div class="light-content featured-content">
+            <h2 id="featured-title"> - Featured Items! - </h2>
+            <br><br>
+        </div>
+        <br><br>
+</div>
+<div class="dark-content featured-items">
+</div>
+<br><br>
+
 <% include partials/footer %>
