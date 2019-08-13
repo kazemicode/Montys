@@ -19,21 +19,25 @@
             <th>Quantity</th>
             <th>Remove</th>
         </tr>
-        <% data.forEach(function(element) { %>
-            <tr class="light-content cart-contents">
-                <td class="item-icon">
-                    <a href="/product"><img src="<%= element['image'] %>" alt="product-image"></a>
-                </td>
-                <td><a href="/product"><%= element["name"] %></a></td>
-                <td><%= element["price"] %></td>
-                <td><%= element["quantity"] %></td>
-                <td><button class="remove-cart-item">X</button></td>
-            </tr>
-        <% }); %>
-        
+        <% if (data.length > 0) { %>
+            <% data.forEach(function(element) { %>
+                <tr class="light-content cart-contents">
+                    <td class="item-icon">
+                        <a href="/product"><img src="<%= element.imgURL %>" alt="product-image"></a>
+                    </td>
+                    <td><a href="/product"><%= element.name %></a></td>
+                    <td><%= element.price %></td>
+                    <td><%= element.qty %></td>
+                    <td><button class="remove-cart-item">X</button></td>
+                </tr>
+            <% }); %>
     </table>
+        <% } else { %>
+    </table>
+            <br><span class="light-content empty-cart-prompt">Your cart is empty.</span><br><br>
+        <% } %>
     <hr>
-    <span class="page-content light-content cart-subtotal"> 32 items - <b>Subtotal:</b> 2542g<br><br>
+    <span class="page-content light-content cart-subtotal"> <%= qty %> items - <b>Subtotal:</b> <%= price %>g<br><br>
         <button class="default-button checkout-button">Checkout</button></span>
     <div class="cart-cushion"></div>
 </div>

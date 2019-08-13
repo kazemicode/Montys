@@ -1,20 +1,19 @@
 <% include partials/header %>
 
 <% include partials/navbar %>
+
 <div class="light-content product-name page-content">
-    <span>Necronomicon</span>
+    <span><%= data.name %></span>
     <br><hr>
 </div>
 
 <div class="light content page-content product-content">
-    <div class="product-image"><img src="/img/necronomicon.png" alt="product-icon"></div>
+    <div class="product-image"><img src="<%= data.imgURL %>" alt="product-icon"></div>
     <span id="product-description">
-        Inked with blood and bound in human flesh, this infamous tome of forbidden knowledge offers great power to those who dare skim its tortuous pages.<br>
-        Buy now and recieve the free audio book edition, narrated by Betty White!<br><br>
-        NO RETURNS!<br><br>
-        <b>Price: 2000g</b><br><br>
+        <%= data.description %><br><br>
+        <div id="product-price"><b>Price: <%= data.price %>g</b></div><br><br>
         Quantity: <input class="product-quantity" type="text" value="1"><br><br>
-        <button class="dark-content default-button">Add to cart</button>
+        <button class="dark-content default-button add-to-cart">Add to cart</button>
     </span>
 </div>
 <br>

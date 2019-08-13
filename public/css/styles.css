@@ -425,6 +425,11 @@ tr:nth-child(even) {
     padding: 0;
 }
 
+.empty-cart-prompt {
+    font-family: var(--basic-font);
+    font-size: 24px;
+}
+
 .cart-subtotal {
     font-family: var(--basic-font);
     font-size: 24px;
