@@ -233,7 +233,6 @@ app.post("/login", async function(req, res) {
 
 app.get("/addProduct", function(req,res){
 
-
     res.render("addProduct", {title: "Admin"});
 });
 
