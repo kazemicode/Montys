@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+
+<% include partials/navbar %>
+<% include partials/adminPanel %>
+
+   <div class="page-content">
+      <table id="cart-table">
+         <tr class="dark-content cart-labels">
+            <th class="item-icon"></th>
+            <th>Image Url</th>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Price</th>              
+            <th>Add</th>
+         </tr>
+
+         <tr class="light-content cart-contents">
+            <td class="item-icon"></td>
+            <td><input type="text" placeholder="image url"></td>
+            <td><input type="text" placeholder="product name"></td>
+            <td><input type="text" placeholder="product description"></td>
+            <td><input type="text" placeholder="price"></td>                 
+            <td><button class="admin-add-item">Add</button></td>
+         </tr>
+         
+      </table>
+
+      <div class="cart-cushion"></div>
+  </div>

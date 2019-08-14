@@ -1,0 +1,34 @@
+<% include partials/header %>
+
+
+<% include partials/navbar %>
+<% include partials/adminPanel %>
+
+   <div class="page-content">
+      <table id="cart-table">
+          <tr class="dark-content cart-labels">
+              <th class="item-icon"></th>
+              <th>Item Name</th>
+              <th>Price</th>              
+              <th>Remove</th>
+          </tr>
+
+      
+      <% if (data.length > 0) { %>
+         <% data.forEach(function(element) { %>
+             <tr class="light-content cart-contents">
+                 <td class="item-icon"></td>
+                 <td><%= element.name %></td>
+                 <td><%= element.price %></td>                 
+                 <td><button class="admin-remove-item">X</button></td>
+             </tr>
+         <% }); %>
+      </table>
+     <% } else { %>
+      </table>
+         <br><span class="light-content empty-cart-prompt">No items returned from database.</span><br><br>
+     <% } %>
+      
+
+      <div class="cart-cushion"></div>
+  </div>

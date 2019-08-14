@@ -1,0 +1,42 @@
+<% include partials/header %>
+
+
+<% include partials/navbar %>
+<% include partials/adminPanel %>
+
+   <div class="page-content">
+      <table id="cart-table">
+          <tr class="dark-content cart-labels">
+              <th class="item-icon"></th>
+              <th>Product Id</th>
+              <th>Item Name</th>
+              <th>Category</th>  
+              <th>Description</th>
+              <th>Price</th>   
+              <th>Image Url</th>            
+              <th>Update</th>
+          </tr>
+
+      
+      <% if (data.length > 0) { %>
+         <% data.forEach(function(element) { %>
+             <tr class="light-content cart-contents">
+               <td class="item-icon"></td>
+               <td><input type="text" placeholder="<%= element.productId %>"></td>
+               <td><input type="text" placeholder="<%= element.name %>"></td>
+               <td><input type="text" placeholder="<%= element.category %>"></td>
+               <td><input type="text" placeholder="<%= element.description %>"></td>  
+               <td><input type="text" placeholder="<%= element.price %>"></td>  
+               <td><input type="text" placeholder="<%= element.imgURL %>"></td>                     
+               <td><button class="admin-update-item">Update</button></td>
+             </tr>
+         <% }); %>
+      </table>
+     <% } else { %>
+      </table>
+         <br><span class="light-content empty-cart-prompt">No items returned from database.</span><br><br>
+     <% } %>
+      
+
+      <div class="cart-cushion"></div>
+  </div>
