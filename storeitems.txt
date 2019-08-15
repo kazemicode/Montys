@@ -80,21 +80,25 @@ Description: Blood harvested from young vampire bats. Used as a crafting ingredi
 Name: Lightly Scorched Shield
 Image: shield_scorched.png
 Price: 500g
-Description: A standard military issue steel shield with traces of adamantium alloy for extra strength. There are a few scorch marks 
-on it, most likely from a small drake or fire spirit, but it is still in good condition.
+Description: (Nate)
 
 Name: Half-Full Health Potion
 Image: Black and white flask (Nate)
 Price: 42g
-Description: Returned by an adventurer who took it from a party member that unfortunately didn't make it back from a difficult quest.
-Final sale. Half off retail price discount. Nothing more. Seriously. You drink it, you buy it.
+Description: (Nate)
 
-Name: Eldritch Cursed Sheets
+Name: Landever Linens  
 Image: A pile of cloth  
-Price: 
-Description:
+Price: (Nate)
+Description: (Nate)
+
+Name: Odd Wizard Hat 
+Image: odd_wizardhat.png
+Price: 2000g
+Description: An oddly shaped wizard hat, said to enhance the user's ability to throw random objects. Do not use around 
+small animals, delicate glass containers, or very small rocks. 
 
 Name: Necronomicon
 Image: necronomicon.png
 Price: (exists)
-Description: (exists)
+Description: (Nate)

@@ -107,17 +107,43 @@ app.get("/products/random", function(req, res) {
     var sql = "SELECT * FROM products ORDER BY Rand() LIMIT 3"
     pool.query(sql, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
   
 // Add new product to the table
 // All params are passed through a form POST
 // Note: Product ID gets autoincremented, so is not passed in
-app.post("/products/add", function(req, res) {
+
+app.post("/products/add", isAuthenticated, function(req, res) {
     var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?)";
     var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
+    });
+});
+
+// Delete existing product from the table
+// All params are passed through a form POST
+app.delete("/products/remove", isAuthenticated, function(req, res) {
+    var sql = "DELETE FROM products WHERE productId = ?";
+    var sqlParams = [req.body.productId];
+    pool.query(sql, sqlParams, function(err, result) {
+        if (err) throw err;
+        res.send(true);
+    });
+});
+
+// Update existing product from the table
+// All params are passed through a form POST
+app.post("/products/update", isAuthenticated, function(req, res) {
+    var sql = "UPDATE products SET name = ?, category = ?, description = ?, price = ?, imgURL = ? WHERE productId = ?";
+    var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL, req.body.productId];
+    console.log(req.body.imgURL);
+    pool.query(sql, sqlParams, function(err, result) {
+        if (err) throw err;
+        res.send(true);
     });
 });
 
@@ -209,26 +235,6 @@ app.delete("/cart/:sessionId/empty", function(req, res) {
         if (err) throw err;
     });
 });
-  
-  // Retrieve total quantity of products in cart
-  // Session id is passed through the request body
-// app.get("/cart/:sessionId/quantity", function(req, res) {
-//     var sql = "SELECT SUM(qty * price) FROM cart WHERE sessionId = ?";
-//     var sqlParams = [req.params.sessionId];
-//     pool.query(sql, sqlParams, function(err, result) {
-//         if (err) throw err;
-//     });
-// });
-  
-  // Retrieve total cost of products in cart
-  // Session id is passed through the request body
-// app.get("/cart/:sessionId/total", function(req, res) {
-//     var sql = "SELECT SUM(price) FROM cart WHERE sessionId = ?";
-//     var sqlParams = [req.params.sessionId];
-//     pool.query(sql, sqlParams, function(err, result) {
-//         if (err) throw err;
-//     });
-// });
 
 // Admin login -------------------------- //
 
@@ -261,20 +267,17 @@ app.post("/login", async function(req, res) {
     }
 });
 
-app.get("/addProduct", function(req,res){
-
+app.get("/addProduct", isAuthenticated, function(req,res){
     res.render("addProduct", {title: "Admin"});
 });
 
-app.get("/removeProduct", async function(req,res){
+app.get("/removeProduct", isAuthenticated, async function(req,res){
     let products = await getProducts();    
-    
     res.render("removeProduct", {title: "Admin", data: products});
 });
 
-app.get("/updateProduct", async function(req,res){
+app.get("/updateProduct", isAuthenticated, async function(req,res){
     let products = await getProducts();    
-    
     res.render("updateProduct", {title: "Admin", data: products});
 });
 

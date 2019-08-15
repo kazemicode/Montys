@@ -188,21 +188,20 @@ tr:nth-child(even) {
 }
 
 .product-image {
-    flex: 50%;
     width: auto;
     height: 300px;
+    padding: 0 96px;
 }
 
 .product-image img {
     display: block;
-    margin-left: 25%;
     height: 100%;
     width: auto;
     border: solid 2px #000;
 }
 
 .product-content span {
-    flex: 50%;
+    flex: .9;
     font-family: var(--basic-font);
     font-size: 24px;
     text-align: left;
@@ -494,6 +493,7 @@ footer {
     margin: auto;
     padding: 100px;    
     width: 800px;
+    text-align: center;
     font-family: var(--fancy-font);
     font-size: 2em;
 }
