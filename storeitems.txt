@@ -89,10 +89,10 @@ Price: 42g
 Description: Returned by an adventurer who took it from a party member that unfortunately didn't make it back from a difficult quest.
 Final sale. Half off retail price discount. Nothing more. Seriously. You drink it, you buy it.
 
-Name: Eldritch Cursed Sheets
+Name: Landever Linens  
 Image: A pile of cloth  
-Price: 
-Description:
+Price: (Nate)
+Description: (Nate)
 
 Name: Necronomicon
 Image: necronomicon.png
