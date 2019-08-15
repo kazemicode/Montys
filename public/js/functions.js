@@ -108,17 +108,16 @@ $(document).ready(function() {
   
   $(".admin-update-item").on("click", function() {
         var productId = $(this).val();
-        //alert($(productId));
-        //alert($(`#name .${productId}`).val());
+        alert(productId);
         $.ajax({
             method: "POST",
             url: "/products/update",
             data: {
-                   "name" : $(`#name .${productId}`).val(),
-                   "category" : $(`#category .${productId}`).val(),
-                   "description" : $(`#description .${productId}`).val(),
-                   "price" : $(`#price .${productId}`).val(), 
-                   "imgURL": $(`#imgURL .${productId}`).val(),
+                   "name" : $(`#${productId}name`).val(),
+                   "category" : $(`#${productId}category`).val(),
+                   "description" : $(`#${productId}description`).val(),
+                   "price" : parseInt($(`#${productId}price`).val()), 
+                   "imgURL": $(`#${productId}imgURL`).val(),
                    productId
             },
             success: function(success) {

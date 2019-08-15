@@ -134,12 +134,15 @@ app.delete("/products/remove", function(req, res) {
 // Update existing product from the table
 // All params are passed through a form POST
 app.post("/products/update", function(req, res) {
-    var sql = "UPDATE products(name, category, description, price, imgURL) VALUES(?,?,?,?,?) WHERE productId = ?";
-    var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL];
+    var sql = "UPDATE products SET name = ?, category = ?, description = ?, price = ?, imgURL = ? WHERE productId = ?";
+    var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL, req.body.productId];
+    console.log(req.body.imgURL);
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
+
 
 // Static Pages -------------------------- //
 

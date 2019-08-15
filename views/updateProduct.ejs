@@ -21,11 +21,11 @@
              <tr class="light-content cart-contents">
                <td class="item-icon"></td>
                <form>
-               <td><input class="<%= element.productId %>" id = "imgURL" type="text" placeholder="<%= element.name %>" required></td>
-               <td><input class="<%= element.productId %>" id = "name" type="text" placeholder="<%= element.category %>" required></td>
-               <td><input class="<%= element.productId %>" id = "description" type="text" placeholder="<%= element.description %>" required></td>  
-               <td><input class="<%= element.productId %>" id = "price" type="text" placeholder="<%= element.price %>" required></td>  
-               <td><input class="<%= element.productId %>" id = "category" type="text" placeholder="<%= element.imgURL %>" required></td>                     
+               <td><input id="<%= element.productId %>name"  type="text" placeholder="<%= element.name %>" required></td>
+               <td><input id="<%= element.productId %>category"  type="text" placeholder="<%= element.category %>" required></td>
+               <td><input id="<%= element.productId %>description"  type="text" placeholder="<%= element.description %>" required></td>  
+               <td><input id="<%= element.productId %>price"  type="text" placeholder="<%= element.price %>" required></td>  
+               <td><input id="<%= element.productId %>imgURL"  type="text" placeholder="<%= element.imgURL %>" required></td>                     
                <td><button class="admin-update-item" value="<%=element.productId%>">Update</button></td>
                </form>
              </tr>
