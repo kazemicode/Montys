@@ -493,6 +493,7 @@ footer {
     margin: auto;
     padding: 100px;    
     width: 800px;
+    text-align: center;
     font-family: var(--fancy-font);
     font-size: 2em;
 }
