@@ -7,28 +7,23 @@
    <div class="page-content">
       <table id="cart-table">
           <tr class="dark-content cart-labels">
-              <th class="item-icon"></th>
-              <th>Product Id</th>
               <th>Item Name</th>
               <th>Category</th>  
               <th>Description</th>
               <th>Price</th>   
               <th>Image Url</th>            
-              <th>Update</th>
+              <th></th>
           </tr>
-
       
       <% if (data.length > 0) { %>
          <% data.forEach(function(element) { %>
              <tr class="light-content cart-contents">
-               <td class="item-icon"></td>
-               <td><input type="text" placeholder="<%= element.productId %>"></td>
-               <td><input type="text" placeholder="<%= element.name %>"></td>
-               <td><input type="text" placeholder="<%= element.category %>"></td>
-               <td><input type="text" placeholder="<%= element.description %>"></td>  
-               <td><input type="text" placeholder="<%= element.price %>"></td>  
-               <td><input type="text" placeholder="<%= element.imgURL %>"></td>                     
-               <td><button class="admin-update-item">Update</button></td>
+                <td><input class="update-name-<%= element.productId %>" type="text" placeholder="<%= element.name %>"></td>
+                <td><input class="update-cat-<%= element.productId %>" type="text" placeholder="<%= element.category %>"></td>
+                <td><input class="update-desc-<%= element.productId %>" type="text" placeholder="<%= element.description %>"></td>  
+                <td><input class="update-price-<%= element.productId %>" type="text" placeholder="<%= element.price %>"></td>  
+                <td><input class="update-image-<%= element.productId %>" type="text" placeholder="<%= element.imgURL %>"></td>                     
+                <td><button class="admin-update-item default-button" value="<%=element.productId%>">Update</button></td>
              </tr>
          <% }); %>
       </table>
