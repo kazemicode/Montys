@@ -36,9 +36,9 @@ $(document).ready(function() {
                 }
             }  
             
-        });
+        }); // ajax
 
-    });
+    }); // add-to-cart
 
     $(".remove-cart-item").on("click", function() {
         
@@ -55,8 +55,33 @@ $(document).ready(function() {
                     window.location.reload();
                 }      
             }
-        });
+        }); // ajax
 
-    });
+    }); // remove-cart-item
+  
+  $(".admin-add-item").on("click", function() {
+        
+        $.ajax({
+            method: "POST",
+            url: "/products/add",
+            data: {
+                   "name" : $("#name").val(),
+                   "category" : $("#category").val(),
+                   "description" : $("#description").val(),
+                   "price" : $("#price").val(), 
+                   "imgURL": $("#imgURL").val()
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            },
+          error: function(error) {
+                alert("An unexpected error occured" + error);
+                window.location.reload();
+          }
+        }); // ajax
 
-});
+    }); // admin-add-item
+
+}); // doc ready

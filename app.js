@@ -347,8 +347,23 @@ function checkPassword(password, hashedValue) {
             resolve(result);
         });
     });
+} 
+
+/** 
+* Checks if user is authenticated
+* if not authenticated, redirect to root
+* if yes, keep going with the next line
+* in the function that made the call
+*/
+function isAuthenticated(req, res, next){
+  if(!req.session.authenticated){
+    res.redirect("/");
+  }
+  else{
+    next();
+  }
 }
 
-app.listen(8081 || process.env.PORT, "127.0.0.1" || process.env.IP, function() {
+app.listen(8081 || process.env.PORT,  "0.0.0.0" || process.env.IP, function() {
     console.log("Express server is running...");
 });

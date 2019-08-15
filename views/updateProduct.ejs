@@ -22,12 +22,12 @@
          <% data.forEach(function(element) { %>
              <tr class="light-content cart-contents">
                <td class="item-icon"></td>
-               <td><input type="text" placeholder="<%= element.productId %>"></td>
-               <td><input type="text" placeholder="<%= element.name %>"></td>
-               <td><input type="text" placeholder="<%= element.category %>"></td>
-               <td><input type="text" placeholder="<%= element.description %>"></td>  
-               <td><input type="text" placeholder="<%= element.price %>"></td>  
-               <td><input type="text" placeholder="<%= element.imgURL %>"></td>                     
+               <td><input type="text" placeholder="<%= element.productId %>" required></td>
+               <td><input type="text" placeholder="<%= element.name %>" required></td>
+               <td><input type="text" placeholder="<%= element.category %>" required></td>
+               <td><input type="text" placeholder="<%= element.description %>" required></td>  
+               <td><input type="text" placeholder="<%= element.price %>" required></td>  
+               <td><input type="text" placeholder="<%= element.imgURL %>" required></td>                     
                <td><button class="admin-update-item">Update</button></td>
              </tr>
          <% }); %>
