@@ -40,4 +40,23 @@ $(document).ready(function() {
 
     });
 
+    $(".remove-cart-item").on("click", function() {
+        
+        var productId = $(this).val();
+
+        $.ajax({
+            method: "POST",
+            url: "/cart/remove",
+            data: {
+                productId
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            }
+        });
+
+    });
+
 });

@@ -142,7 +142,8 @@ app.get("/cart", async function(req, res) {
         json,
         data: cartContents,
         qty,
-        price
+        price,
+        link: "/product/" + cartContents.productId
     });
 });
 
@@ -163,11 +164,12 @@ app.post("/cart/add", async function(req, res) {
 
   // Remove product from to cart
   // Session id and product id are passed through the request body
-app.delete("/cart/:sessionId/productId/remove", function(req, res) {
+app.post("/cart/remove", function(req, res) {
     var sql = "DELETE FROM cart WHERE sessionId = ? AND productId = ?";
-    var sqlParams = [req.params.sessionId, req.params.productId];
+    var sqlParams = [req.session.id, req.body.productId];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
   
