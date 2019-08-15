@@ -91,8 +91,14 @@ Final sale. Half off retail price discount. Nothing more. Seriously. You drink i
 
 Name: Landever Linens  
 Image: A pile of cloth  
-Price: 
-Description:
+Price: (Nate)
+Description: (Nate)
+
+Name: Odd Wizard Hat 
+Image: odd_wizardhat.png
+Price: 2000g
+Description: An oddly shaped wizard hat, said to enhance the user's ability to throw random objects. Do not use around 
+small animals, delicate glass containers, or 
 
 Name: Necronomicon
 Image: necronomicon.png
