@@ -211,26 +211,6 @@ app.delete("/cart/:sessionId/empty", function(req, res) {
         if (err) throw err;
     });
 });
-  
-  // Retrieve total quantity of products in cart
-  // Session id is passed through the request body
-// app.get("/cart/:sessionId/quantity", function(req, res) {
-//     var sql = "SELECT SUM(qty * price) FROM cart WHERE sessionId = ?";
-//     var sqlParams = [req.params.sessionId];
-//     pool.query(sql, sqlParams, function(err, result) {
-//         if (err) throw err;
-//     });
-// });
-  
-  // Retrieve total cost of products in cart
-  // Session id is passed through the request body
-// app.get("/cart/:sessionId/total", function(req, res) {
-//     var sql = "SELECT SUM(price) FROM cart WHERE sessionId = ?";
-//     var sqlParams = [req.params.sessionId];
-//     pool.query(sql, sqlParams, function(err, result) {
-//         if (err) throw err;
-//     });
-// });
 
 // Admin login -------------------------- //
 
