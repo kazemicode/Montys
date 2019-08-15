@@ -114,7 +114,27 @@ app.get("/products/random", function(req, res) {
 // All params are passed through a form POST
 // Note: Product ID gets autoincremented, so is not passed in
 app.post("/products/add", function(req, res) {
-    var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?,?)";
+    var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?)";
+    var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL];
+    pool.query(sql, sqlParams, function(err, result) {
+        if (err) throw err;
+    });
+});
+
+// Delete existing product from the table
+// All params are passed through a form POST
+app.delete("/products/remove", function(req, res) {
+    var sql = "DELETE FROM products WHERE productId = ?";
+    var sqlParams = [req.body.productId];
+    pool.query(sql, sqlParams, function(err, result) {
+        if (err) throw err;
+    });
+});
+
+// Update existing product from the table
+// All params are passed through a form POST
+app.post("/products/update", function(req, res) {
+    var sql = "UPDATE products(name, category, description, price, imgURL) VALUES(?,?,?,?,?) WHERE productId = ?";
     var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;

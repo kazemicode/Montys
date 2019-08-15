@@ -8,7 +8,9 @@
       <table id="cart-table">
           <tr class="dark-content cart-labels">
               <th class="item-icon"></th>
-              <th>Item Name</th>
+              <th>Product ID</th>
+              <th>Category</th>
+              <th>Name</th>
               <th>Price</th>              
               <th>Remove</th>
           </tr>
@@ -18,9 +20,11 @@
          <% data.forEach(function(element) { %>
              <tr class="light-content cart-contents">
                  <td class="item-icon"></td>
+                 <td><%= element.productId %></td>
+                 <td><%= element.category %></td>
                  <td><%= element.name %></td>
                  <td><%= element.price %></td>                 
-                 <td><button class="admin-remove-item">X</button></td>
+                 <td><button class="admin-remove-item" value="<%=element.productId%>">X</button></td>
              </tr>
          <% }); %>
       </table>

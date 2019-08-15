@@ -83,5 +83,55 @@ $(document).ready(function() {
         }); // ajax
 
     }); // admin-add-item
+  
+  $(".admin-remove-item").on("click", function() {
+    
+        var productId = $(this).val();
+        $.ajax({
+            type: "DELETE",
+            url: "/products/remove",
+            data: {
+                   productId
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            },
+          error: function(error) {
+                alert("An unexpected error occured" + error);
+                window.location.reload();
+          }
+        }); // ajax
 
+    }); // admin-remove-item
+  
+  $(".admin-update-item").on("click", function() {
+        var productId = $(this).val();
+        //alert($(productId));
+        //alert($(`#name .${productId}`).val());
+        $.ajax({
+            method: "POST",
+            url: "/products/update",
+            data: {
+                   "name" : $(`#name .${productId}`).val(),
+                   "category" : $(`#category .${productId}`).val(),
+                   "description" : $(`#description .${productId}`).val(),
+                   "price" : $(`#price .${productId}`).val(), 
+                   "imgURL": $(`#imgURL .${productId}`).val(),
+                   productId
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            },
+          error: function(error) {
+                alert("An unexpected error occured" + error);
+                window.location.reload();
+          }
+        }); // ajax
+
+    }); // admin-update-item
+ 
 }); // doc ready

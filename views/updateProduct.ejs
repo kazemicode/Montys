@@ -8,7 +8,6 @@
       <table id="cart-table">
           <tr class="dark-content cart-labels">
               <th class="item-icon"></th>
-              <th>Product Id</th>
               <th>Item Name</th>
               <th>Category</th>  
               <th>Description</th>
@@ -16,19 +15,19 @@
               <th>Image Url</th>            
               <th>Update</th>
           </tr>
-
       
       <% if (data.length > 0) { %>
          <% data.forEach(function(element) { %>
              <tr class="light-content cart-contents">
                <td class="item-icon"></td>
-               <td><input type="text" placeholder="<%= element.productId %>" required></td>
-               <td><input type="text" placeholder="<%= element.name %>" required></td>
-               <td><input type="text" placeholder="<%= element.category %>" required></td>
-               <td><input type="text" placeholder="<%= element.description %>" required></td>  
-               <td><input type="text" placeholder="<%= element.price %>" required></td>  
-               <td><input type="text" placeholder="<%= element.imgURL %>" required></td>                     
-               <td><button class="admin-update-item">Update</button></td>
+               <form>
+               <td><input class="<%= element.productId %>" id = "imgURL" type="text" placeholder="<%= element.name %>" required></td>
+               <td><input class="<%= element.productId %>" id = "name" type="text" placeholder="<%= element.category %>" required></td>
+               <td><input class="<%= element.productId %>" id = "description" type="text" placeholder="<%= element.description %>" required></td>  
+               <td><input class="<%= element.productId %>" id = "price" type="text" placeholder="<%= element.price %>" required></td>  
+               <td><input class="<%= element.productId %>" id = "category" type="text" placeholder="<%= element.imgURL %>" required></td>                     
+               <td><button class="admin-update-item" value="<%=element.productId%>">Update</button></td>
+               </form>
              </tr>
          <% }); %>
       </table>
