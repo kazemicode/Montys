@@ -23,12 +23,12 @@
             <% data.forEach(function(element) { %>
                 <tr class="light-content cart-contents">
                     <td class="item-icon">
-                        <a href="/product"><img src="<%= element.imgURL %>" alt="product-image"></a>
+                        <a href="/products/<%= element.productId %>"><img src="<%= element.imgURL %>" alt="product-image"></a>
                     </td>
-                    <td><a href="/product"><%= element.name %></a></td>
+                    <td><a href="/products/<%= element.productId %>"><%= element.name %></a></td>
                     <td><%= element.price %></td>
                     <td><%= element.qty %></td>
-                    <td><button class="remove-cart-item">X</button></td>
+                    <td><button class="remove-cart-item" value="<%=element.productId%>">X</button></td>
                 </tr>
             <% }); %>
     </table>

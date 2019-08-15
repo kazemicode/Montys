@@ -1,0 +1,100 @@
+Name: Organic Boiled Water Flask
+Image: waterflask.png
+Price: 25g
+Description: Organic, natural,  gluten-free, non-GMO, spring fed, cage free, keto friendly, responsibly raised,
+low carb, certified kosher, low sodium, fatless, raw, demonically purged water in a glass flask. Hand boiled
+by artisans for over 100 hours in centuries old copper kettles. Meets all IMSO 9999 standards for hydration.
+
+Name: Sizzlin' Sizzler Skewers
+Image: sizzlinskewers.png
+Price: 35g
+Description: A trio of gryphon, wildbeast, and dire wolf meat skewers grilled to perfection. Meat procured from the ancient ruins of Sizlon, where legends speak of guests who paid a single price for banquets with endless amounts of food. High in protein and easy to carry in any adventuring pack. 
+
+Name: Blade of Arranath 
+Image: arranath_blade.PNG
+Price: 10,000g
+Description: Renowned warrior and merchant Arranath used this blade to slay the demon king of the Second Age.
+Gives an attack bonus against all demons, and reduces chaos damage taken.
+
+Name: Puffy Cloudrice Balls
+Image: cloudrice_balls.png
+Price: 5g
+Description: Steamed rice balls harvested from rice clouds above cloud cities. Eating these might make
+you feel fluffy and sleepy.
+
+Name: Solaire's Solitude
+Image: solaires_solitude.png
+Price: 6,000g
+Description: A bright, glowing shield that emits an aura of warmth. 
+
+Name: The Joker 
+Image: thejoker.png 
+Price: 5,000g
+Description: One half of a legendary pair of daggers. Increases evasion and luck. When paired with the Thief, increases agility stat by 50% and all damage by 10%. 
+
+Name: The Thief
+Image: thethief.png
+Price: 5,000g
+Description: One half of a legendary pair of daggers. Increases item rarity from monster drops and critical chance. When paired with the Joker, increases agility stat by 50% and all critical damage by 10%. 
+
+Name: Wysteri's Mystery 
+Image: wysteris_mystery.png
+Price: 8,000g
+Description: A whimsical book filled with spells on summoning creatures and handling them. Unusual for books of its type, the creatures it mentions are friendly familiars and pets, unlike the...unspeakable horrors of the Necronomicon.
+
+Name: Black Hole Backpack
+Image: blackholebag.png
+Price: 20,000g
+Description: A backpack infused with the power of the cosmos and universe. Thanks to time warping and interdimensional portal spells, it has an infinite amount of storage. However, attemping to stick a hand inside to reach something at the bottom might take eons to retrieve. 
+
+Name: Crowbar
+Image: crowbar.png
+Price: 50,000g
+Description: According to legend, this crowbar was used by a scientist of few words to combat a mysterious organization and otherworldly creatures.
+
+Name: Dragon's Breath 
+Image: dragonsbreath.png
+Price: 30g
+Description: A mixture of pure liquid dragon's breath extract, crushed mana berries, and sweet schnozzies, served over ice. The sweetness of the fruits balances out the heat of the dragon's breath. Side effects of drinking might include breathing fire. 
+
+Name: Mirror of Kazemius
+Image: kazemius.png
+Price: 9,500g 
+Description: This mystical, magical mirror was forged in the waters of Sweetwater Valley and polished with diamond dust for a brilliant reflection. Impervious to scratching, it increases the bearer's intelligence and experience gained.
+
+Name: Windstorm Bow 
+Image: windstormbow.png
+Price: 10,000g
+Description: The high elf rangers of Acordia are known for their expert fletching skills and mastery of archery. This bow fires magical wind arrows that can pierce multiple targets with deadly accuracy. 
+
+Name: The Fist of Ty Dorri  
+Image: fist_tydorri.png
+Price: 8,000g
+Description: Ty Dorri was a mythical barbarian who preferred to fight with his fists wearing sturdy leather gauntlets instead of bladed weapons. During the War of Demon King in the Second Age, he once defeated 1,000 demon soldiers with his two hands while in a berserker's rage. 
+
+Name: Youngling's Blood
+Image: youngling.png
+Price: 10g
+Description: Blood harvested from young vampire bats. Used as a crafting ingredient in potions.
+
+Name: Lightly Scorched Shield
+Image: shield_scorched.png
+Price: 500g
+Description: A standard military issue steel shield with traces of adamantium alloy for extra strength. There are a few scorch marks 
+on it, most likely from a small drake or fire spirit, but it is still in good condition.
+
+Name: Half-Full Health Potion
+Image: Black and white flask (Nate)
+Price: 42g
+Description: Returned by an adventurer who took it from a party member that unfortunately didn't make it back from a difficult quest.
+Final sale. Half off retail price discount. Nothing more. Seriously. You drink it, you buy it.
+
+Name: Eldritch Cursed Sheets
+Image: A pile of cloth  
+Price: 
+Description:
+
+Name: Necronomicon
+Image: necronomicon.png
+Price: (exists)
+Description: (exists)

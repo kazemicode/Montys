@@ -9,6 +9,14 @@ const pool = mysql.createPool({
     database: "heroku_c64927c31179572"
 });
 
+// const pool = mysql.createPool({
+//     connectionLimit: 7,
+//     host: "127.0.0.1",
+//     user: "root",
+//     password: "sesame",
+//     database: "cst336_final_project"
+// });
+
 pool.getConnection((error, connection) => {
     if (error) throw error;
     if (connection) connection.release();

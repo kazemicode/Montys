@@ -9,6 +9,14 @@ const jsonfile = require("jsonfile");
 const jsonpath = "./public/json/page_data.json"
 var json = jsonfile.readFileSync(jsonpath);
 
+app.use(session({
+    secret: "top secret!",
+    resave: true,
+    saveUninitialized: true
+ }));
+
+app.use(express.urlencoded({extended: true})); // to be able to parse POST parameters
+
 const pool = require("./database");
 
 app.use(session({
@@ -22,17 +30,17 @@ app.use(express.urlencoded({extended: true}));
 // Routes
 
 // Root route
-<<<<<<< HEAD
-// app.get("/", async function(req, res) {
-// Do stuff
-// };)
-=======
 app.get("/", async function(req, res) {
     res.render("index", {title: "Home", json});
 });
 
 app.get("/products", async function(req, res) {
-    res.render("products", {title: "Products", json});
+    var data = await getProducts();
+    res.render("products", {
+        title: "Products", 
+        json, 
+        data
+    });
 });
 
 /* Monty's API Routes */
@@ -154,16 +162,18 @@ app.post("/cart/add", async function(req, res) {
     var sqlParams = [req.session.id, req.body.productId, req.body.quantity, req.body.price, productCategory[0].category, req.body.quantity];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
 
   // Remove product from to cart
   // Session id and product id are passed through the request body
-app.delete("/cart/:sessionId/productId/remove", function(req, res) {
+app.post("/cart/remove", function(req, res) {
     var sql = "DELETE FROM cart WHERE sessionId = ? AND productId = ?";
-    var sqlParams = [req.params.sessionId, req.params.productId];
+    var sqlParams = [req.session.id, req.body.productId];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
   
@@ -219,7 +229,8 @@ app.post("/login", async function(req, res) {
     let passwordMatch = await checkPassword(password, hashedPwd);
 
     if (username == usernameValue && passwordMatch) {
-        req.session.authenticated = true;
+        req.session.authenticated = true;          
+
         res.render("admin", {title: "Admin"});
     }
     else {
@@ -227,9 +238,22 @@ app.post("/login", async function(req, res) {
     }
 });
 
-app.get("/admin", function(req, res) {
-    res.render("admin", {title: "Admin"});
-});;
+app.get("/addProduct", function(req,res){
+
+    res.render("addProduct", {title: "Admin"});
+});
+
+app.get("/removeProduct", async function(req,res){
+    let products = await getProducts();    
+    
+    res.render("removeProduct", {title: "Admin", data: products});
+});
+
+app.get("/updateProduct", async function(req,res){
+    let products = await getProducts();    
+    
+    res.render("updateProduct", {title: "Admin", data: products});
+});
 
 app.get("/logout", function(req, res) {
     req.session.destroy();
@@ -295,6 +319,18 @@ function getCartContents(sessionId) {
     });
 }
 
+// Returns all rows within the product table
+function getProducts() {
+    let sql = "SELECT * FROM products ORDER BY name ASC";
+    
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, function(err, rows) {
+            if (err) throw err;
+            resolve(rows);
+        });
+    });
+}
+
 function checkUsername(username) {
     let sql = "SELECT * FROM users WHERE username = ?";
     return new Promise(function (resolve, reject) {
@@ -312,152 +348,7 @@ function checkPassword(password, hashedValue) {
         });
     });
 }
->>>>>>> origin/Development
 
-/* Monty's API Routes */
-// Note: req.params gets data passed in via the request body -- use with router params (preceded by ':')
-//       req.query  gets data passed in via the request query string 
-// Add new product to cart
-
-/* PRODUCTS */
-/************/
-
-// Get product based off category (submitted via drop down search)
-// Category is passed through query string
-app.get("/searchByCategory", function(req, res) {
-  var sql = "SELECT * FROM products WHERE category = ?"
-  var sqlParams = [req.query.category];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
+app.listen(8081 || process.env.PORT, "127.0.0.1" || process.env.IP, function() {
+    console.log("Express server is running...");
 });
-
-// Get product based off name (string-based form search)
-// Name is passed through query string
-app.get("/searchByName", function(req, res) {
-  var sql = "SELECT * FROM products WHERE name = ?"
-  var sqlParams = [req.query.name];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-
-// Get product based off id
-// Product id is passed through request body
-app.get("/products/:productId", function(req, res) {
-  var sql = "SELECT * FROM products WHERE productId = ?"
-  var sqlParams = [req.params.productId];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Get three random products
-// No params needed
-app.get("/products/random", function(req, res) {
-
-  var sql = "SELECT * FROM products ORDER BY Rand() LIMIT 3"
-  pool.query(sql, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Add new product to the table
-// All params are passed through a form POST
-// Note: Product ID gets autoincremented, so is not passed in
-app.post("/products/add", function(req, res) {
-  var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?,?)";
-  var sqlParams = [req.query.name, req.query.category, req.query.description, req.query.price, req.query.imgURL];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-
-/* CART */
-/********/
-
-// Add a product to cart
-// Session id is passed through request body
-// Note: Cart ID gets autoincremented, so is not passed in
-// All other params passed through a query string
-app.post("/cart/:sessionId/add", function(req, res) {
-  var sql = "INSERT INTO cart(sessionId, productId, qty, price, category) VALUES(?,?,?,?,?,?)";
-  var sqlParams = [req.params.sessionId, req.query.productId, req.query.quantity, req.query.price, (req.query.quantity * req.query.price), req.query.category];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Remove product from to cart
-// Session id and product id are passed through the request body
-app.delete("/cart/:sessionId/productId/remove", function(req, res) {
-  var sql = "DELETE FROM cart WHERE sessionId = ? AND productId = ?";
-  var sqlParams = [req.params.sessionId, req.params.productId];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Empty cart
-// Session id is passed through the request body
-app.delete("/cart/:sessionId/empty", function(req, res) {
-  var sql = "DELETE FROM cart WHERE sessionId = ?";
-  var sqlParams = [req.params.sessionId];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Retrieve total quantity of products in cart
-// Session id is passed through the request body
-app.get("/cart/:sessionId/quantity", function(req, res) {
-  var sql = "SELECT SUM(qty * price) FROM cart WHERE sessionId = ?";
-  var sqlParams = [req.params.sessionId];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Retrieve total cost of products in cart
-// Session id is passed through the request body
-app.get("/cart/:sessionId/total", function(req, res) {
-  var sql = "SELECT SUM(price) FROM cart WHERE sessionId = ?";
-  var sqlParams = [req.params.sessionId];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-/* ORDERS */
-/**********/
-// Add new product to orders
-// Session id is passed through the request body
-// Note: cart ID becomes order ID
-app.post("/orders/:sessionId/add", function(req, res) {
-  var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(SELECT * FROM cart WHERE sessionId = ?)";
-  var sqlParams = [req.params.sessionId];
-  pool.query(sql, sqlParams, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-// Returns a report of total number of orders, total quantity of items, and total revenue -- grouped by product category
-app.post("/orders/report", function(req, res){
-  var sql = 'SELECT SUM(DISTINCT orderId) as totalOrders, SUM(qty) as totalItems, SUM(price*qty) as totalRevenue FROM orders GROUP BY ROLLUP(category)';
-  pool.query(sql, function(err, result) {
-    if (err) throw err;
-  });
-});
-
-
-/* SERVER LISTENER */
-/*******************/
-app.listen("8081", "127.0.0.1", function() {
-  console.log("Express server is running...");
-});
-
-// app.listen(process.env.PORT, process.env.IP, function() {
-//     console.log("Running Express Server...");
-// });

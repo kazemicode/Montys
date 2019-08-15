@@ -225,6 +225,20 @@ tr:nth-child(even) {
     text-align: right;
 }
 
+.loading-image {
+    z-index: 10;
+    display: block;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+.loading-image img {
+    width: 480px;
+    height: 360px;
+}
+
 .search-content {
     display: flex;
     padding-top: 64px;
@@ -462,4 +476,53 @@ footer {
     font-family: var(--basic-font);
     font-size: 0.8em;
     text-align: center;
+}
+
+.admin-header {
+    text-align: center;
+    font-family: var(--fancy-font);
+    font-size: 4em;
+}
+
+.admin-content {
+    margin: auto;
+    padding: 100px;    
+    width: 800px;
+}
+
+.admin-login {
+    margin: auto;
+    padding: 100px;    
+    width: 800px;
+    font-family: var(--fancy-font);
+    font-size: 2em;
+}
+
+.admin-content input {
+    margin: auto;
+    width: 600px;   
+    padding: 10px; 
+    font-family: var(--fancy-font);
+    font-size: 2em;
+    width: 800px;
+    background-color: white;
+    border-radius: 5px;    
+    box-shadow: 0 0px 12px rgba(5, 33, 55, .85);
+}
+
+.admin-login form {
+    margin: auto;
+    text-align: center;
+    width: 600px;   
+    padding: 10px; 
+    /* font-family: var(--fancy-font); */
+    font-size: 2em;
+    width: 800px;
+}
+
+.admin-login input {  
+    margin: auto;
+    padding: 10px; 
+    /* font-family: var(--fancy-font); */
+
 }
