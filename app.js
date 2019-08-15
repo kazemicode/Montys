@@ -36,7 +36,11 @@ app.get("/", async function(req, res) {
 
 app.get("/products", async function(req, res) {
     var data = await getProducts();
-    res.render("products", {title: "Products", json, data});
+    res.render("products", {
+        title: "Products", 
+        json, 
+        data
+    });
 });
 
 /* Monty's API Routes */
@@ -143,8 +147,7 @@ app.get("/cart", async function(req, res) {
         json,
         data: cartContents,
         qty,
-        price,
-        link: "/product/" + cartContents.productId
+        price
     });
 });
 
