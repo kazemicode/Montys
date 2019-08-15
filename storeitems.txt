@@ -96,7 +96,7 @@ Name: Odd Wizard Hat
 Image: odd_wizardhat.png
 Price: 2000g
 Description: An oddly shaped wizard hat, said to enhance the user's ability to throw random objects. Do not use around 
-small animals, delicate glass containers, or 
+small animals, delicate glass containers, or very small rocks. 
 
 Name: Necronomicon
 Image: necronomicon.png
