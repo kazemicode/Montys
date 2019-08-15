@@ -107,6 +107,7 @@ app.get("/products/random", function(req, res) {
     var sql = "SELECT * FROM products ORDER BY Rand() LIMIT 3"
     pool.query(sql, function(err, result) {
         if (err) throw err;
+        res.send(true);
     });
 });
   
@@ -114,10 +115,34 @@ app.get("/products/random", function(req, res) {
 // All params are passed through a form POST
 // Note: Product ID gets autoincremented, so is not passed in
 app.post("/products/add", function(req, res) {
-    var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?,?)";
+    var sql = "INSERT INTO products(name, category, description, price, imgURL) VALUES(?,?,?,?,?)";
     var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
+        res.send(true);
+    });
+});
+
+// Delete existing product from the table
+// All params are passed through a form POST
+app.delete("/products/remove", function(req, res) {
+    var sql = "DELETE FROM products WHERE productId = ?";
+    var sqlParams = [req.body.productId];
+    pool.query(sql, sqlParams, function(err, result) {
+        if (err) throw err;
+        res.send(true);
+    });
+});
+
+// Update existing product from the table
+// All params are passed through a form POST
+app.post("/products/update", function(req, res) {
+    var sql = "UPDATE products SET name = ?, category = ?, description = ?, price = ?, imgURL = ? WHERE productId = ?";
+    var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL, req.body.productId];
+    console.log(req.body.imgURL);
+    pool.query(sql, sqlParams, function(err, result) {
+        if (err) throw err;
+        res.send(true);
     });
 });
 
@@ -347,8 +372,23 @@ function checkPassword(password, hashedValue) {
             resolve(result);
         });
     });
+} 
+
+/** 
+* Checks if user is authenticated
+* if not authenticated, redirect to root
+* if yes, keep going with the next line
+* in the function that made the call
+*/
+function isAuthenticated(req, res, next){
+  if(!req.session.authenticated){
+    res.redirect("/");
+  }
+  else{
+    next();
+  }
 }
 
-app.listen(8081 || process.env.PORT, "127.0.0.1" || process.env.IP, function() {
+app.listen(8081 || process.env.PORT,  "0.0.0.0" || process.env.IP, function() {
     console.log("Express server is running...");
 });

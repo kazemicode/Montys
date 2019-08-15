@@ -36,9 +36,9 @@ $(document).ready(function() {
                 }
             }  
             
-        });
+        }); // ajax
 
-    });
+    }); // add-to-cart
 
     $(".remove-cart-item").on("click", function() {
         
@@ -55,8 +55,92 @@ $(document).ready(function() {
                     window.location.reload();
                 }      
             }
-        });
+        }); // ajax
 
-    });
+    }); // remove-cart-item
+  
+  $(".admin-add-item").on("click", function() {
+        
+        $.ajax({
+            method: "POST",
+            url: "/products/add",
+            data: {
+                   name : $("#name").val(),
+                   category : $("#category").val(),
+                   description : $("#description").val(),
+                   price : $("#price").val(), 
+                   imgURL: $("#imgURL").val()
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            },
+          error: function(error) {
+                alert("An unexpected error occured" + error);
+          }
+        }); // ajax
 
-});
+    }); // admin-add-item
+  
+  $(".admin-remove-item").on("click", function() {
+    
+        var productId = $(this).val();
+        $.ajax({
+            type: "DELETE",
+            url: "/products/remove",
+            data: {
+                   productId
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            },
+          error: function(error) {
+                alert("An unexpected error occured" + error);
+          }
+        }); // ajax
+
+    }); // admin-remove-item
+  
+  $(".admin-update-item").on("click", function() {
+        var productId = $(this).val();
+        var name = getAttributeValue($(`.update-name-${productId}`).val(), $(`.update-name-${productId}`).attr("placeholder"));
+        var category = getAttributeValue($(`.update-cat-${productId}`).val(), $(`.update-cat-${productId}`).attr("placeholder"));
+        var description = getAttributeValue($(`.update-desc-${productId}`).val(), $(`.update-desc-${productId}`).attr("placeholder"));
+        var price = getAttributeValue($(`.update-price-${productId}`).val(), $(`.update-price-${productId}`).attr("placeholder"));
+        var imgURL = getAttributeValue($(`.update-image-${productId}`).val(), $(`.update-image-${productId}`).attr("placeholder"));
+        console.log("imgURL: " + imgURL);
+
+        $.ajax({
+            method: "POST",
+            url: "/products/update",
+            data: {
+                   name,
+                   category,
+                   description,
+                   price, 
+                   imgURL,
+                   productId
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.replace("/login");
+                }      
+            },
+            error: function(error) {
+                alert("An unexpected error occured" + error);
+            }
+        }); // ajax
+
+    }); // admin-update-item
+
+    function getAttributeValue(value, placeholder) {
+        if (value == "")
+            return placeholder;
+        else
+            return value;
+    }
+ 
+}); // doc ready
