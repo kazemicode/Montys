@@ -35,7 +35,8 @@ app.get("/", async function(req, res) {
 });
 
 app.get("/products", async function(req, res) {
-    res.render("products", {title: "Products", json});
+    var data = await getProducts();
+    res.render("products", {title: "Products", json, data});
 });
 
 /* Monty's API Routes */
@@ -317,12 +318,11 @@ function getCartContents(sessionId) {
 
 // Returns all rows within the product table
 function getProducts() {
-    let sql = "SELECT * FROM products";
+    let sql = "SELECT * FROM products ORDER BY name ASC";
     
     return new Promise(function(resolve, reject) {
         pool.query(sql, function(err, rows) {
             if (err) throw err;
-            console.log(rows);
             resolve(rows);
         });
     });
@@ -346,11 +346,6 @@ function checkPassword(password, hashedValue) {
     });
 }
 
-// Server listener
-app.listen("8081", "127.0.0.1", function() {
+app.listen(8081 || process.env.PORT, "127.0.0.1" || process.env.IP, function() {
     console.log("Express server is running...");
 });
-
-// app.listen(process.env.PORT, process.env.IP, function() {
-//     console.log("Running Express Server...");
-// });
