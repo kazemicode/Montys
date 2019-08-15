@@ -36,10 +36,21 @@ app.get("/", async function(req, res) {
 
 app.get("/products", async function(req, res) {
     var data = await getProducts();
+    var cats = await getAllCategories();
+    var range = await getPriceRange();
+
+    var rangeValues = [];
+
+    for (var i = range[0].min; i < range[0].max + 1; i += 100) {
+        rangeValues.push(i);
+    }
+
     res.render("products", {
         title: "Products", 
         json, 
-        data
+        data,
+        cats,
+        rangeValues
     });
 });
 
@@ -64,6 +75,18 @@ app.get("/priceRange", function(req, res) {
 app.get("/categories", function(req, res) {
     var sql = "SELECT DISTINCT category FROM products ORDER BY ASC";
     pool.query(sql, function(err, rows) {
+        if (err) throw err;
+        res.send(rows[0]);
+    });
+});
+
+app.get("/products/search", async function(req, res) {
+    var sql = "SELECT * FROM products ?";
+    var sqlParams = "";
+    if (!req.query.data == undefined) {
+        sqlParams = "WHERE " + req.query.data;
+    }
+    pool.query(sql, sqlParams, function(err, rows) {
         if (err) throw err;
         res.send(rows[0]);
     });
@@ -329,6 +352,28 @@ function getProducts() {
         pool.query(sql, function(err, rows) {
             if (err) throw err;
             resolve(rows);
+        });
+    });
+}
+
+function getAllCategories() {
+    let sql = "SELECT DISTINCT category FROM products";
+
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, function(err, rows) {
+            if (err) throw err;
+            resolve(rows);
+        });
+    });
+}
+
+function getPriceRange() {
+    let sql = "SELECT MIN(price) as min, MAX(price) as max FROM products";
+
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, function(err, result) {
+            if (err) throw err;
+            resolve(result);
         });
     });
 }

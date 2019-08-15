@@ -2,6 +2,14 @@ $(document).ready(function() {
 
     $(".loading-image").hide();
 
+    $("button[name=search]").on("click", function() {
+
+        var itemName = $("input[name=search-name]").val();
+        var cat = $("input[name=search-category]").val();
+        var minRange = $("input[name=search-min-price]").val();
+        var maxRange = $("input[name=search-max-price]").val();
+    });
+
     // Called when clicking on the "Add to cart" button (product page)
     // Sends the productId, quantity specified, and price to the server
     $(".add-to-cart").on("click", function() {
