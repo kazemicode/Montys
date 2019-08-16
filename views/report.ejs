@@ -1,0 +1,33 @@
+<% include partials/header %>
+<% include partials/navbar %>
+<% include partials/adminPanel %>
+
+<div class="page-content">
+      <table id="report-table">
+          <tr class="dark-content cart-labels">
+                    <th>Product Category</th>
+                    <th>Total Orders</th>
+                    <th>Total Items</th>
+                    <th>Total Revenue</th>
+                </tr>
+                <% if (data.length > 0) { %>
+               <% data.forEach(function(element) { %>
+                        <tr class="light-content report-contents">
+                            <td><%= element.category %> </td>
+                            <td><%= element.totalOrders %> </td>
+                            <td><%= element.totalItems %></td>
+                            <td><%= element.totalRevenue %>g</td>
+                        </tr>
+                       <% }); %> 
+                         
+                <% } %>
+        
+     
+        
+
+            </table>
+  
+   
+    </div>
+</div>
+

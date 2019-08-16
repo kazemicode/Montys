@@ -126,7 +126,7 @@ $(document).ready(function() {
             },
             success: function(success) {
                 if (success) {
-                    window.location.replace("/login");
+                    window.location.reload();
                 }      
             },
             error: function(error) {

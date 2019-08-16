@@ -281,6 +281,12 @@ app.get("/updateProduct", isAuthenticated, async function(req,res){
     res.render("updateProduct", {title: "Admin", data: products});
 });
 
+app.get("/report", isAuthenticated, async function(req,res){
+    let orders = await getOrders();
+    res.render("report", {title: "Admin", data: orders});
+
+});
+
 app.get("/logout", function(req, res) {
     req.session.destroy();
     res.redirect("/");
@@ -301,7 +307,7 @@ app.post("/orders/:sessionId/add", function(req, res) {
   
   // Returns a report of total number of orders, total quantity of items, and total revenue -- grouped by product category
 app.post("/orders/report", function(req, res){
-    var sql = 'SELECT SUM(DISTINCT orderId) as totalOrders, SUM(qty) as totalItems, SUM(price*qty) as totalRevenue FROM orders GROUP BY ROLLUP(category)';
+    var sql = 'SELECT SUM(DISTINCT orderId) as totalOrders, SUM(qty) as totalItems, SUM(price*qty) as totalRevenue FROM orders GROUP BY category WITH ROLLUP';
     pool.query(sql, function(err, result) {
         if (err) throw err;
     });
@@ -349,6 +355,17 @@ function getCartContents(sessionId) {
 function getProducts() {
     let sql = "SELECT * FROM products ORDER BY name ASC";
     
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, function(err, rows) {
+            if (err) throw err;
+            resolve(rows);
+        });
+    });
+}
+
+// Returns all rows within the orders table
+function getOrders() {
+    var sql = 'SELECT category, SUM(DISTINCT orderId) as totalOrders, SUM(qty) as totalItems, SUM(price*qty) as totalRevenue FROM orders GROUP BY category WITH ROLLUP';
     return new Promise(function(resolve, reject) {
         pool.query(sql, function(err, rows) {
             if (err) throw err;
