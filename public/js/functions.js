@@ -100,7 +100,7 @@ $(document).ready(function() {
 
     }); // remove-cart-item
   
-    $("#checkout-button").on("click", function() {
+    $(".checkout-button").on("click", function() {
         
         var productId = window.location.pathname.split("/").pop();
         var price = $("#product-price b").text().split(" ").pop().replace('g', '');
