@@ -293,16 +293,36 @@ app.get("/logout", function(req, res) {
 
 /* ORDERS */
 /**********/
-// Add new product to orders
-// Session id is passed through the request body
-// Note: cart ID becomes order ID
-app.post("/orders/:sessionId/add", function(req, res) {
-    var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(SELECT * FROM cart WHERE sessionId = ?)";
-    var sqlParams = [req.session.id];
+
+app.post("/checkout", async function(req, res) {
+    var cartContents = await getCartContents(req.session.id);
+    cartContents.forEach(function(item) {
+        let sql = "INSERT INTO orders(sessionId, productId, qty, price, category) VALUES(?, ?, ?, ?, ?)"
+        let sqlParams = [item.sessionId, item.productId, item.qty, item.price, item.category];
+        pool.query(sql, sqlParams, function(err, result) {
+            if (err) throw err;
+        });
+    });
+    let sql = "DELETE FROM cart WHERE sessionId = ?";
+    let sqlParams = req.session.id;
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
     });
+    res.send(true);
 });
+
+// Add new product to orders
+// Session id is passed through the request body
+// Note: cart ID becomes order ID
+// app.post("/orders/add", async function(req, res) {
+//     var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(SELECT * FROM cart WHERE sessionId = ?)";
+//     var cartContents = await getCartContents();
+//     var sqlParams = [cartContents.sessionId, cartContents.];
+//     pool.query(sql, sqlParams, function(err, result) {
+//         if (err) throw err;
+//         res.send(true);
+//     });
+// });
   
   // Returns a report of total number of orders, total quantity of items, and total revenue -- grouped by product category
 app.post("/orders/report", function(req, res){
