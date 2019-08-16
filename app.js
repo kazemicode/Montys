@@ -81,15 +81,24 @@ app.get("/categories", function(req, res) {
 });
 
 app.get("/products/search", async function(req, res) {
-    var sql = "SELECT * FROM products ?";
-    var sqlParams = "";
-    if (!req.query.data == undefined) {
-        sqlParams = "WHERE " + req.query.data;
-    }
+    var searchParams = await constructSearch(req.query);
+    var sql = "SELECT * FROM products WHERE " + searchParams.labels;
+    var sqlParams = searchParams.values;
+
     pool.query(sql, sqlParams, function(err, rows) {
         if (err) throw err;
-        res.send(rows[0]);
+        res.send(rows);
     });
+});
+
+app.get("/products/searchAll", async function(req, res) {
+    var sql = "SELECT * FROM products";
+
+    pool.query(sql, function(err, rows) {
+        if (err) throw err;
+        res.send(rows);
+    });
+
 });
 
 // Get product based off category (submitted via drop down search)
@@ -162,7 +171,6 @@ app.delete("/products/remove", isAuthenticated, function(req, res) {
 app.post("/products/update", isAuthenticated, function(req, res) {
     var sql = "UPDATE products SET name = ?, category = ?, description = ?, price = ?, imgURL = ? WHERE productId = ?";
     var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL, req.body.productId];
-    console.log(req.body.imgURL);
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
         res.send(true);
@@ -307,6 +315,33 @@ app.post("/orders/report", function(req, res){
 });
 
 // Functions
+
+function constructSearch(data) {
+    var labels = [];
+    var values = [];
+
+    if (data.itemName != "") {
+        labels.push("name LIKE ?");
+        values.push("%" + data.itemName + "%");
+    }
+    if (data.cat != "") {
+        labels.push("category = ?");
+        values.push(String(data.cat));
+    }
+    if (data.minRange != "") {
+        labels.push("price >= ?");
+        values.push(String(data.minRange));
+    }
+    if (data.maxRange != "") {
+        labels.push("price <= ?");
+        values.push(String(data.maxRange));
+    }
+
+    return {
+        labels: labels.join(" AND "),
+        values: values
+    };
+}
 
 // Return a category given a productId
 function getItemCategory(productId) {
