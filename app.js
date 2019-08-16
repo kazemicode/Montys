@@ -486,6 +486,6 @@ function isAuthenticated(req, res, next){
   }
 }
 
-app.listen(8081 || process.env.PORT,  "0.0.0.0" || process.env.IP, function() {
+app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Express server is running...");
 });
