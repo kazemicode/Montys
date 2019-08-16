@@ -330,7 +330,7 @@ app.get("/logout", function(req, res) {
 // Note: cart ID becomes order ID
 app.post("/orders/:sessionId/add", function(req, res) {
     var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(SELECT * FROM cart WHERE sessionId = ?)";
-    var sqlParams = [req.params.sessionId];
+    var sqlParams = [req.session.id];
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
     });
