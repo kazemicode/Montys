@@ -135,7 +135,28 @@ $(document).ready(function() {
         }); // ajax
 
     }); // admin-update-item
+  
+    $(".checkout-button").on("click", function() {
+    
+        var productId = $(this).val();
+        $.ajax({
+            type: "DELETE",
+            url: "/products/remove",
+            data: {
+                   productId
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                }      
+            },
+          error: function(error) {
+                alert("An unexpected error occured" + error);
+          }
+        }); // ajax
 
+    }); // admin-remove-item
+   
     function getAttributeValue(value, placeholder) {
         if (value == "")
             return placeholder;

@@ -165,7 +165,21 @@ tr:nth-child(even) {
 }
 
 .featured-items {
-    min-height: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.featured-items img {
+    flex: .3;
+    max-height: 200px;
+    width: auto;
+    padding: 32px;
+}
+
+.featured-items a {
+    border: 1px solid #000;
+    font-family: var(--fancy-font);
+    font-size: 24px;
 }
 
 .slogan {
