@@ -26,10 +26,13 @@
         <div class="light-content featured-content">
             <h2 id="featured-title"> - Featured Items! - </h2>
             <br><br>
+            <div class="featured-items">
+            <% data.forEach(function(item) { %>
+                <a href="/products/<%= item.productId %>"><%= item.name %><br><img src="<%= item.imgURL %>" alt="product-image"></a>
+            <% }); %>
+            </div>
         </div>
         <br><br>
-</div>
-<div class="dark-content featured-items">
 </div>
 <br><br>
 

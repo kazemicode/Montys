@@ -31,7 +31,8 @@ app.use(express.urlencoded({extended: true}));
 
 // Root route
 app.get("/", async function(req, res) {
-    res.render("index", {title: "Home", json});
+    var data = await featuredItems();
+    res.render("index", {title: "Home", json, data});
 });
 
 app.get("/products", async function(req, res) {
@@ -133,16 +134,6 @@ app.get("/products/:productId", function(req, res) {
     });
 });
   
-  // Get three random products
-  // No params needed
-app.get("/products/random", function(req, res) {
-    var sql = "SELECT * FROM products ORDER BY Rand() LIMIT 3"
-    pool.query(sql, function(err, result) {
-        if (err) throw err;
-        res.send(true);
-    });
-});
-  
 // Add new product to the table
 // All params are passed through a form POST
 // Note: Product ID gets autoincremented, so is not passed in
@@ -177,29 +168,6 @@ app.post("/products/update", isAuthenticated, function(req, res) {
         res.send(true);
     });
 });
-
-// Delete existing product from the table
-// All params are passed through a form POST
-app.delete("/products/remove", function(req, res) {
-    var sql = "DELETE FROM products WHERE productId = ?";
-    var sqlParams = [req.body.productId];
-    pool.query(sql, sqlParams, function(err, result) {
-        if (err) throw err;
-    });
-});
-
-// Update existing product from the table
-// All params are passed through a form POST
-app.post("/products/update", function(req, res) {
-    var sql = "UPDATE products SET name = ?, category = ?, description = ?, price = ?, imgURL = ? WHERE productId = ?";
-    var sqlParams = [req.body.name, req.body.category, req.body.description, req.body.price, req.body.imgURL, req.body.productId];
-    console.log(req.body.imgURL);
-    pool.query(sql, sqlParams, function(err, result) {
-        if (err) throw err;
-        res.send(true);
-    });
-});
-
 
 // Static Pages -------------------------- //
 
@@ -371,6 +339,17 @@ function constructSearch(data) {
         labels: labels.join(" AND "),
         values: values
     };
+}
+
+function featuredItems() {
+    let sql = "SELECT * FROM products ORDER BY Rand() LIMIT 3";
+
+    return new Promise(function(resolve, reject) {
+        pool.query(sql, function(err, rows) {
+            if (err) throw err;
+            resolve(rows);
+        });
+    });
 }
 
 // Return a category given a productId
