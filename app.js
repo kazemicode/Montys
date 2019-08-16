@@ -224,8 +224,6 @@ app.post("/cart/remove", function(req, res) {
         res.send(true);
     });
 });
-  
- 
 
 // Admin login -------------------------- //
 
@@ -285,15 +283,23 @@ app.get("/logout", function(req, res) {
 
 /* ORDERS */
 /**********/
-// Add new product to orders
-// Session id is passed through the request body
-// Note: cart ID becomes order ID
-app.post("/orders/add", async function(req, res) { 
-    var row = await(getNextCartRow(req.session.id));
-    var sql = "INSERT INTO orders(orderId, sessionId, productId, qty, price) VALUES(row[0], row[1], row[2], row[3], row[4])";
+
+// Add contents of cart to orders table and empty current user cart
+app.post("/checkout", async function(req, res) {
+    var cartContents = await getCartContents(req.session.id);
+    cartContents.forEach(function(item) {
+        let sql = "INSERT INTO orders(sessionId, productId, qty, price, category) VALUES(?, ?, ?, ?, ?)"
+        let sqlParams = [item.sessionId, item.productId, item.qty, item.price, item.category];
+        pool.query(sql, sqlParams, function(err, result) {
+            if (err) throw err;
+        });
+    });
+    let sql = "DELETE FROM cart WHERE sessionId = ?";
+    let sqlParams = req.session.id;
     pool.query(sql, sqlParams, function(err, result) {
         if (err) throw err;
     });
+    res.send(true);
 });
   
   // Returns a report of total number of orders, total quantity of items, and total revenue -- grouped by product category
@@ -305,10 +311,7 @@ app.post("/orders/report", function(req, res){
 });
 
 // Functions
-function getNextCartRow(sessionId)
-{
-  var sql = `SELECT * FROM cart WHERE sessionId = ${sessionId})`;
-}
+
 function constructSearch(data) {
     var labels = [];
     var values = [];
@@ -461,6 +464,6 @@ function isAuthenticated(req, res, next){
   }
 }
 
-app.listen(8081 || process.env.PORT,  "0.0.0.0" || process.env.IP, function() {
+app.listen(process.env.PORT, process.env.IP, function() {
     console.log("Express server is running...");
 });
