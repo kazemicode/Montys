@@ -9,7 +9,7 @@
 
     <div class="page-content search-content">
         <div class="page-content search-filters">
-            <form id="search-form" method="POST" action="">
+            <form id="search-form" action="">
                 
                 <div class="search-element">
                     <label for="search-name">Item name</label>
@@ -20,6 +20,9 @@
                     <label for="search-category">Category</label>
                     <select id="search-category" name="search-category">
                         <option value="">Select category</option>
+                        <% cats.forEach(function(cat) { %>
+                            <option value="<%= cat.category %>"><%= cat.category %></option>
+                        <% }); %>
                     </select>
                 </div>
 
@@ -27,6 +30,9 @@
                     <label for="search-min-price">Minimum price</label>
                     <select id="search-min-price" name="search-min-price">
                         <option value="">Choose</option>
+                        <% rangeValues.forEach(function(price) { %>
+                            <option class="min-price" value="<%= price %>"><%= price %></option>
+                        <% }); %>
                     </select>
                 </div>
 
@@ -34,6 +40,9 @@
                     <label for="search-max-price">Maximum price</label>
                     <select id="search-max-price" name="search-max-price">
                         <option value="">Choose</option>
+                        <% rangeValues.forEach(function(price) { %>
+                            <option class="max-price" value="<%= price %>"><%= price %></option>
+                        <% }); %>
                     </select>
                 </div>
 
