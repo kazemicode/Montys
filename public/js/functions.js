@@ -100,6 +100,32 @@ $(document).ready(function() {
 
     }); // remove-cart-item
   
+    $("#checkout-button").on("click", function() {
+        
+        var productId = window.location.pathname.split("/").pop();
+        var price = $("#product-price b").text().split(" ").pop().replace('g', '');
+        var quantity = $(".product-quantity").val();
+        var dt = new Date().toString();
+
+        $.ajax({
+            method: "POST",
+            url: "/orders/:sessionId/add",
+            data: {
+                productId,
+                price,
+                quantity
+            },
+            success: function(success) {
+                if (success) {
+                    window.location.reload();
+                    console.log("Order placed."); 
+                    alert("Order placed successfully at " + dt);
+                }      
+            }
+        }); // AJAX  
+
+    });
+
   $(".admin-add-item").on("click", function() {
         
         $.ajax({
