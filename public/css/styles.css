@@ -526,3 +526,9 @@ footer {
     /* font-family: var(--fancy-font); */
 
 }
+
+.admin-total-report {
+  color: var(--violet-hover);
+  font-style: bold;
+  font-size: 1.2em;
+}

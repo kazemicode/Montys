@@ -3,7 +3,7 @@
 <% include partials/adminPanel %>
 
 <div class="page-content">
-      <table id="report-table">
+      <table id="cart-table">
           <tr class="dark-content cart-labels">
                     <th>Product Category</th>
                     <th>Total Orders</th>
@@ -11,15 +11,21 @@
                     <th>Total Revenue</th>
                 </tr>
                 <% if (data.length > 0) { %>
-               <% data.forEach(function(element) { %>
-                        <tr class="light-content report-contents">
-                            <td><%= element.category %> </td>
-                            <td><%= element.totalOrders %> </td>
-                            <td><%= element.totalItems %></td>
-                            <td><%= element.totalRevenue %>g</td>
+               <% var last = data.length-1; %>
+               <% for(let i = 0; i < data.length-1; i++) { %>
+                        <tr class="light-content cart-contents">
+                            <td><%= data[i].category %> </td>
+                            <td><%= data[i].totalOrders %> </td>
+                            <td><%= data[i].totalItems %></td>
+                            <td><%= data[i].totalRevenue %>g</td>
                         </tr>
-                       <% }); %> 
-                         
+                       <% } %> 
+                    <tr class="light-content cart-contents">
+                            <td class="admin-total-report">ALL</td>
+                            <td class="admin-total-report"><%= data[last].totalOrders %> </td>
+                            <td class="admin-total-report"><%= data[last].totalItems %></td>
+                            <td class="admin-total-report"><%= data[last].totalRevenue %>g</td>
+                        </tr>     
                 <% } %>
         
      
