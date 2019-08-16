@@ -11,17 +11,23 @@
             <th>Image Url</th>
             <th>Item Name</th>
             <th>Description</th>
-            <th>Price</th>              
+            <th>Price</th>
+            <th>Category</th>  
             <th>Add</th>
          </tr>
 
          <tr class="light-content cart-contents">
             <td class="item-icon"></td>
-            <td><input type="text" placeholder="image url"></td>
-            <td><input type="text" placeholder="product name"></td>
-            <td><input type="text" placeholder="product description"></td>
-            <td><input type="text" placeholder="price"></td>                 
+           <form>
+             
+            <td><input id = "imgURL" type="text" placeholder="image url"></td>
+            <td><input id = "name" type="text" placeholder="product name"></td>
+            <td><input id = "description" type="text" placeholder="product description"></td>
+            <td><input id = "price" type="text" placeholder="price"></td>
+            <td><input id = "category" type="text" placeholder="category"></td>
             <td><button class="admin-add-item">Add</button></td>
+             
+           </form>
          </tr>
          
       </table>

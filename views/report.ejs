@@ -1,0 +1,39 @@
+<% include partials/header %>
+<% include partials/navbar %>
+<% include partials/adminPanel %>
+
+<div class="page-content">
+      <table id="cart-table">
+          <tr class="dark-content cart-labels">
+                    <th>Product Category</th>
+                    <th>Total Orders</th>
+                    <th>Total Items</th>
+                    <th>Total Revenue</th>
+                </tr>
+                <% if (data.length > 0) { %>
+               <% var last = data.length-1; %>
+               <% for(let i = 0; i < data.length-1; i++) { %>
+                        <tr class="light-content cart-contents">
+                            <td><%= data[i].category %> </td>
+                            <td><%= data[i].totalOrders %> </td>
+                            <td><%= data[i].totalItems %></td>
+                            <td><%= data[i].totalRevenue %>g</td>
+                        </tr>
+                       <% } %> 
+                    <tr class="light-content cart-contents">
+                            <td class="admin-total-report">ALL</td>
+                            <td class="admin-total-report"><%= data[last].totalOrders %> </td>
+                            <td class="admin-total-report"><%= data[last].totalItems %></td>
+                            <td class="admin-total-report"><%= data[last].totalRevenue %>g</td>
+                        </tr>     
+                <% } %>
+        
+     
+        
+
+            </table>
+  
+   
+    </div>
+</div>
+

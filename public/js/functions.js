@@ -145,7 +145,7 @@ $(document).ready(function() {
 
     }); // admin-remove-item
   
-  $(".admin-update-item").on("click", function() {
+   $(".admin-update-item").on("click", function() {
         var productId = $(this).val();
         var name = getAttributeValue($(`.update-name-${productId}`).val(), $(`.update-name-${productId}`).attr("placeholder"));
         var category = getAttributeValue($(`.update-cat-${productId}`).val(), $(`.update-cat-${productId}`).attr("placeholder"));
@@ -166,7 +166,7 @@ $(document).ready(function() {
             },
             success: function(success) {
                 if (success) {
-                    window.location.replace("/login");
+                    window.location.reload();
                 }      
             },
             error: function(error) {
