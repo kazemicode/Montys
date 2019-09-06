@@ -1,5 +1,5 @@
-#Monty's Pontificating Firefly Bazaar#
-##Description##
+# Monty's Pontificating Firefly Bazaar
+## Description
 Monty’s is a whimsical  e-commerce website that currently supports authenticated admin login using bcrypt. Once authenticated, the administrator has access to a dynamic form on the frontend that utilizes several API endpoints that expose actions to update, insert, and delete products from the products table in the ClearDB schema. In addition to this, the administrator is able to view a report that shows the total number of orders completed, the total amount of products sold, and the total revenue earned. These metrics are grouped by product category with rollup. 
 
 In version 1.0, user account generation is not supported. Rather, guest shopping carts and checkouts are tracked using sessions through the express-sessions package. The front page uses an API endpoint that fetches three random products in order to display them to the user. The user can also search for products through a text field by name or through a populated dropdown by category.
@@ -11,8 +11,8 @@ When a user checks out, all the records associated with the user’s session id 
 ##Database ER Diagram##
 
 
-##API Documentation##
-###Products###
+## API Documentation
+### Products
 `POST  /products/add`
 Add product to the database. 
 
@@ -54,7 +54,7 @@ productId | Product id (Required)
 `GET  /products/random`
 Retrieve random three products
 
-###Cart###
+### Cart
 `POST  /cart/:productId/add`
 Add item to cart session.
 
@@ -82,7 +82,7 @@ param | Description
 ------------ | -------------
 sessionId | Session id (Required)
 
-###Orders###
+### Orders
 `POST  /orders/:sessionId/add`
 Add list of items associated with cart session id to order.
 
@@ -90,6 +90,6 @@ param | Description
 ------------ | -------------
 sessionId | Session id (Required)
 
-###Sales Report###
+### Sales Report
 `GET /report`
 Retrieve breakdown of orders: total number of orders, total quantity of products ordered, total revenue -- grouped by product category with rollup.
